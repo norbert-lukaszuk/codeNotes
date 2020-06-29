@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Oswald", sans-serif;
+}
 .header__wraper {
   display: flex;
   justify-content: center;
@@ -7,16 +14,48 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 30px;
+  height: 35px;
 }
 .languages {
   background-color: indianred;
   position: absolute;
   top: 0;
-  padding: 40px;
-  transform: translateY(-85%);
+  padding: 40px 40px 0 40px;
+  transform: translateY(-80%);
   transition: all 0.3s ease-out;
 }
 .languages:hover {
   transform: translateY(0);
+}
+.languages p:last-child {
+  margin-bottom: 6px;
+}
+.nav__wraper {
+  position: absolute;
+  left: 0;
+  top: 35px;
+  width: 210px;
+  height: 100vh;
+  background-color: greenyellow;
+  transform: translateX(-170px);
+  transition: all 0.3s ease-out;
+}
+.nav__wraper--show {
+  transform: translateX(0);
+}
+.navi {
+  position: relative;
+}
+.navi i {
+  position: absolute;
+  right: 7px;
+  top: 3px;
+}
+.navi ul {
+  position: absolute;
+  top: 40px;
+  padding-left: 20px;
+}
+.navi ul li {
+  list-style: none;
 }
