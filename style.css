@@ -19,6 +19,11 @@
   width: 100vw;
   height: 35px;
 }
+.hamburger {
+  position: absolute;
+  right: 7px;
+  top: 3px;
+}
 .header__wraper > i {
   position: absolute;
   bottom: 20px;
@@ -59,16 +64,21 @@
 .navi {
   position: relative;
 }
-.navi i {
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 70px);
   position: absolute;
-  right: 7px;
-  top: 3px;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  border: 1px solid black;
 }
-.navi ul {
-  position: absolute;
-  top: 40px;
-  padding-left: 20px;
+.tile-one {
+  grid-column: 1/2;
+  grid-row: 1/2;
 }
-.navi ul li {
-  list-style: none;
+.tile-one {
+  border: 1px solid black;
+  background-color: hotpink;
 }
