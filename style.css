@@ -72,13 +72,22 @@
   width: 100%;
   top: 60px;
   left: 0;
-  border: 1px solid black;
 }
 .tile-one {
   grid-column: 1/2;
   grid-row: 1/2;
+  border: groove 4px;
+  background-color: indianred;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.tile-one {
-  border: 1px solid black;
-  background-color: hotpink;
+.tile-two {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  border: groove 4px;
+  background-color: indianred;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
