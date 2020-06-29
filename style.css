@@ -7,17 +7,22 @@
 }
 :root {
   --grayBackground: rgba(190, 186, 186, 0.534);
+  --headerColor: rgba(139, 42, 143, 0.685);
 }
 .header__wraper {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: greenyellow;
-  position: fixed;
+  background-color: var(--headerColor);
   top: 0;
   left: 0;
   width: 100vw;
   height: 35px;
+}
+.header__wraper > i {
+  position: absolute;
+  bottom: 20px;
+  left: 40%;
 }
 .languages {
   position: absolute;
@@ -25,10 +30,13 @@
   padding: 40px 40px 0 40px;
   transform: translateY(-77%);
   transition: all 0.3s ease-out;
+  border-left: solid 2px var(--grayBackground);
+  border-right: solid 2px var(--grayBackground);
 }
 .languages:hover {
   transform: translateY(0);
   background-color: var(--grayBackground);
+  border: none;
 }
 .languages p:last-child {
   margin-top: 10px;
