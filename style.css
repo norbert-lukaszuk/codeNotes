@@ -5,6 +5,9 @@
   box-sizing: border-box;
   font-family: "Oswald", sans-serif;
 }
+:root {
+  --grayBackground: rgba(190, 186, 186, 0.534);
+}
 .header__wraper {
   display: flex;
   justify-content: center;
@@ -17,31 +20,33 @@
   height: 35px;
 }
 .languages {
-  background-color: indianred;
   position: absolute;
   top: 0;
   padding: 40px 40px 0 40px;
-  transform: translateY(-80%);
+  transform: translateY(-77%);
   transition: all 0.3s ease-out;
 }
 .languages:hover {
   transform: translateY(0);
+  background-color: var(--grayBackground);
 }
 .languages p:last-child {
+  margin-top: 10px;
   margin-bottom: 6px;
 }
 .nav__wraper {
   position: absolute;
   left: 0;
   top: 35px;
-  width: 210px;
+  width: 190px;
   height: 100vh;
-  background-color: greenyellow;
-  transform: translateX(-170px);
-  transition: all 0.3s ease-out;
+  /* background-color: greenyellow; */
+  transform: translateX(-150px);
+  transition: all 0.5s ease-out;
 }
 .nav__wraper--show {
   transform: translateX(0);
+  background-color: var(--grayBackground);
 }
 .navi {
   position: relative;
