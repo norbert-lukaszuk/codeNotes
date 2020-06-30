@@ -1,0 +1,23 @@
+{
+  "name": "codeNotes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norbert-lukaszuk/codeNotes.git"
+  },
+  "keywords": [],
+  "author": "Norbert Łukaszuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/norbert-lukaszuk/codeNotes/issues"
+  },
+  "homepage": "https://github.com/norbert-lukaszuk/codeNotes#readme",
+  "dependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
