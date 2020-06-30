@@ -72,21 +72,27 @@
   width: 100%;
   top: 60px;
   left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease-out;
+}
+.tiles--show {
+  /* display: grid; */
+  opacity: 1;
 }
 .tile-one {
   grid-column: 1/2;
   grid-row: 1/2;
   border: groove 4px;
-  background-color: indianred;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .tile-two {
   grid-column: 2/3;
   grid-row: 1/2;
   border: groove 4px;
-  background-color: indianred;
   display: flex;
   justify-content: center;
   align-items: center;
