@@ -10,6 +10,8 @@
   --fogBackground: rgba(0, 0, 0, 0.1);
   --headerColor: #2a9d8f;
   --jsColor: rgba(228, 216, 42, 0.8);
+  --cssColor: rgba(31, 112, 235, 0.8);
+  --htmlColor: rgba(255, 115, 0, 0.8);
 }
 .backarrow {
   opacity: 0;
@@ -25,7 +27,7 @@ body {
 }
 .fog__background {
   position: absolute;
-  top: 35px;
+  top: 55px;
   left: 190px;
   width: 190px;
   height: 100vh;
@@ -46,20 +48,17 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 45px;
+  height: 55px;
 }
-.hamburger {
-  position: absolute;
-  right: 7px;
-  top: 3px;
-}
+
 .hamburger--hide {
   display: none;
 }
 .header__wraper > i {
   position: absolute;
-  bottom: 20px;
-  left: 40%;
+  top: 0;
+  left: 10px;
+  /* left: 40%; */
 }
 .language__tag {
   padding-top: 10px;
@@ -98,7 +97,7 @@ body {
 .nav__wraper {
   position: absolute;
   left: 0;
-  top: 45px;
+  top: 55px;
   width: 210px;
   height: 100vh;
   transform: translateX(-150px);
@@ -118,10 +117,10 @@ body {
   flex-direction: column;
   width: 300px;
   height: 200px;
-  margin-top: 100px;
   background-color: var(--jsColor);
-  margin: 55px auto;
+  margin: 25px auto;
   border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 .snippet__text {
   height: 150px;
