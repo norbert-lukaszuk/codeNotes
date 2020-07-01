@@ -19,9 +19,6 @@
   pointer-events: all;
   transform: translateX(150px);
 }
-body > h1 {
-  text-align: center;
-}
 .fog__background {
   position: absolute;
   top: 35px;
@@ -70,8 +67,9 @@ body > h1 {
   cursor: pointer;
 }
 .languages p {
-  margin: 0 auto; 
+  margin: 0 auto;
   width: 50%;
+  font-size: 1.25rem;
 }
 .languages p:hover {
   background-color: var(--grayBackground);
