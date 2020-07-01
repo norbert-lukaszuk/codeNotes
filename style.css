@@ -7,8 +7,20 @@
 }
 :root {
   --grayBackground: rgba(190, 186, 186, 0.534);
-  --fogBackground: rgba(0, 0, 0, 0.2);
+  --fogBackground: rgba(0, 0, 0, 0.1);
   --headerColor: rgba(139, 42, 143, 0.65);
+}
+.backarrow {
+  opacity: 0;
+  pointer-events: none;
+}
+.backarrow--show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(150px);
+}
+body > h1 {
+  text-align: center;
 }
 .fog__background {
   position: absolute;
@@ -16,7 +28,6 @@
   left: 190px;
   width: 190px;
   height: 100vh;
-  background-color: var(--fogBackground);
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease-out;
@@ -34,12 +45,15 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 35px;
+  height: 45px;
 }
 .hamburger {
   position: absolute;
   right: 7px;
   top: 3px;
+}
+.hamburger--hide {
+  display: none;
 }
 .header__wraper > i {
   position: absolute;
@@ -67,8 +81,8 @@
 .nav__wraper {
   position: absolute;
   left: 0;
-  top: 35px;
-  width: 190px;
+  top: 45px;
+  width: 210px;
   height: 100vh;
   transform: translateX(-150px);
   transition: all 0.5s ease-out;
