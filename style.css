@@ -62,10 +62,24 @@ body > h1 {
 }
 .languages {
   position: absolute;
-  top: 0;
+  width: 100vw;
   padding: 40px 40px 0 40px;
-  transform: translateY(-77%);
+  text-align: center;
+  transform: translateY(-145%);
   transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+.languages p {
+  margin: 0 auto; 
+  width: 50%;
+}
+.languages p:hover {
+  background-color: var(--grayBackground);
+}
+.languages--show {
+  /* top: 45px; */
+  transform: translateY(0);
+  background-color: var(--fogBackground);
 }
 .languages:hover {
   transform: translateY(0);
