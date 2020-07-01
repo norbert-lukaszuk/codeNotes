@@ -8,7 +8,7 @@
 :root {
   --grayBackground: rgba(190, 186, 186, 0.534);
   --fogBackground: rgba(0, 0, 0, 0.1);
-  --headerColor: rgba(139, 42, 143, 0.65);
+  --headerColor: #2a9d8f;
 }
 .backarrow {
   opacity: 0;
@@ -66,8 +66,6 @@ body > h1 {
   padding: 40px 40px 0 40px;
   transform: translateY(-77%);
   transition: all 0.3s ease-out;
-  border-left: solid 2px var(--grayBackground);
-  border-right: solid 2px var(--grayBackground);
 }
 .languages:hover {
   transform: translateY(0);
@@ -98,7 +96,7 @@ body > h1 {
   display: grid;
   /* grid-template-columns: 1fr 1fr; */
   grid-template-columns: 100%;
-  grid-template-rows: repeat(3, 50px);
+  grid-template-rows: repeat(3, 70px);
   position: absolute;
   width: 100%;
   top: 60px;
@@ -114,7 +112,11 @@ body > h1 {
 .tile-one {
   grid-column: 1/2;
   grid-row: 1/2;
-  border: groove 4px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e76f51;
+  margin: 5px 10px;
+  box-shadow: 5px 5px 10px #000000a9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,8 +125,26 @@ body > h1 {
 .tile-two {
   grid-column: 1/2;
   grid-row: 2/3;
-  border: groove 4px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f4a261;
+  margin: 5px 10px;
+  box-shadow: 5px 5px 10px #000000a9;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+.tile-three {
+  grid-column: 1/2;
+  grid-row: 3/4;
+  border: none;
+  border-radius: 10px;
+  background-color: #e9c46a;
+  margin: 5px 10px;
+  box-shadow: 5px 5px 10px #000000a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
