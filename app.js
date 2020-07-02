@@ -14,6 +14,7 @@ fog__background.addEventListener("click", (e) => {
     fog__background.classList.toggle("fog__background--show");
     backarrow.classList.toggle("backarrow--show");
     hamburger.classList.toggle("hamburger--hide");
+    nav__list.classList.toggle("nav__list--show");
   }
 });
 // back arrow for closing navi
