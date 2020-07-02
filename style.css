@@ -56,7 +56,7 @@ body {
 }
 .header__wraper > i {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 10px;
 }
 .language__tag {
