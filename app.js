@@ -36,17 +36,3 @@ hamburger.addEventListener("click", () => {
 });
 
 // header click to change category
-header__wraper.addEventListener("click", (e) => {
-  console.log(e.target.tagName);
-  if (e.target.tagName === "P" || e.target.tagName === "DIV") {
-    languages.classList.toggle("languages--show");
-  }
-});
-// change the language
-languages.addEventListener("click", (e) => {
-  if (e.target.tagName === "P") {
-    console.log(e.target.innerText);
-    selected.textContent = e.target.innerText;
-    languages.classList.remove("languages--show");
-  }
-});
