@@ -35,9 +35,17 @@ hamburger.addEventListener("click", () => {
   nav__list.classList.toggle("nav__list--show");
 });
 
-// nav selecting
+// selecting from nav icons
 nav__list.addEventListener("click", (e) => {
-  console.log(e.target.nextElementSibling.firstElementChild.classList);
-  e.target.nextElementSibling.firstElementChild.classList.toggle("show");
+  // console.log(e.target.nextElementSibling.firstElementChild.classList);
+  const target = e.target.nextElementSibling.firstElementChild;
+  console.log("target", target.classList);
+  e.target.classList.contains("navList__element")
+    ? target.classList.toggle("show")
+    : false;
   // e.target.nextElementSibling.firstElementChild.classList.toggle("show");
+});
+// select from submenu
+language__list.addEventListener("click", (e) => {
+  console.log(e.target.textContent);
 });
