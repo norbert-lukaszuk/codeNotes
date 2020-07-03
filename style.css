@@ -28,8 +28,8 @@ body {
 .fog__background {
   position: absolute;
   top: 55px;
-  left: 190px;
-  width: 190px;
+  left: 210px;
+  width: 100%;
   height: 100vh;
   opacity: 0;
   pointer-events: none;
@@ -58,6 +58,9 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
+}
+.language__list {
+  display: none;
 }
 .language__tag {
   padding-top: 10px;
@@ -112,6 +115,9 @@ body {
 }
 .navi {
   position: relative;
+}
+.show {
+  display: block;
 }
 .snippet__container {
   display: flex;

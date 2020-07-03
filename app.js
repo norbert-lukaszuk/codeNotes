@@ -1,6 +1,7 @@
 const hamburger = document.querySelector("#hamburger");
 const header__wraper = document.querySelector("#header__wraper");
 const selected = document.querySelector("#selected");
+const language__list = document.querySelector("#language__list");
 const nav__list = document.querySelector("#nav__list");
 const nav__wraper = document.querySelector("#nav__wraper");
 const fog__background = document.querySelector("#fog__background");
@@ -34,4 +35,9 @@ hamburger.addEventListener("click", () => {
   nav__list.classList.toggle("nav__list--show");
 });
 
-// header click to change category
+// nav selecting
+nav__list.addEventListener("click", (e) => {
+  console.log(e.target.nextElementSibling.firstElementChild.classList);
+  e.target.nextElementSibling.firstElementChild.classList.toggle("show");
+  // e.target.nextElementSibling.firstElementChild.classList.toggle("show");
+});
