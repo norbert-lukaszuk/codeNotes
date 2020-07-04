@@ -25,6 +25,16 @@
 body {
   width: 100vw;
 }
+.container__menu {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.snippet__container:hover + div[className="container__menu"] {
+  display: block;
+}
 .fog__background {
   position: absolute;
   top: 55px;
@@ -141,6 +151,7 @@ body {
   opacity: 1;
 }
 .snippet__container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;

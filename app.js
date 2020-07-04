@@ -19,7 +19,21 @@ const loadContent = () => {
     Body.appendChild(container);
   });
 };
-// loadContent();
+// change header text and color
+
+const changeHeader = (element) => {
+  // selected.parentElement.style.backgroundColor = getComputedStyle(
+  //   element
+  // ).backgroundColor;
+  selected.parentElement.style.backgroundColor = element.color;
+  selected.textContent = element.lang;
+  language__list.classList.remove("show");
+  nav__wraper.classList.remove("nav__wraper--show");
+  fog__background.classList.remove("fog__background--show");
+  backarrow.classList.remove("backarrow--show");
+  hamburger.classList.remove("hamburger--hide");
+  nav__list.classList.remove("nav__list--show");
+};
 // filter by language
 const loadFiltered = (lang) => {
   output.innerHTML = "";
@@ -28,26 +42,13 @@ const loadFiltered = (lang) => {
       const container = document.createElement("div");
       container.style.backgroundColor = `${e.color}`;
       container.className = "snippet__container";
-      container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
+      container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
       output.appendChild(container);
+      changeHeader(e);
     }
   });
 };
 loadFiltered("Java Script");
-// change header text and color
-
-const changeHeader = (element) => {
-  selected.parentElement.style.backgroundColor = getComputedStyle(
-    element
-  ).backgroundColor;
-  selected.textContent = element.textContent;
-  language__list.classList.remove("show");
-  nav__wraper.classList.remove("nav__wraper--show");
-  fog__background.classList.remove("fog__background--show");
-  backarrow.classList.remove("backarrow--show");
-  hamburger.classList.remove("hamburger--hide");
-  nav__list.classList.remove("nav__list--show");
-};
 
 // background to click for closing
 fog__background.addEventListener("click", (e) => {

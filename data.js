@@ -13,6 +13,12 @@ const data = [
     color: "var(--cssColor)",
   },
   {
+    lang: "CSS",
+    code: "const style = getComputedStyle(element).backgroundColor",
+    tags: ["get", "backgroundColor"],
+    color: "var(--cssColor)",
+  },
+  {
     lang: "Java Script",
     code: "arr = ['buy','milk']<br>arr.forEach((e)=>{<br>console.log(e)})",
     tags: ["array", "forEach"],
