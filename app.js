@@ -7,10 +7,10 @@ const nav__wraper = document.querySelector("#nav__wraper");
 const fog__background = document.querySelector("#fog__background");
 const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
+const output = document.querySelector("#output");
 import data from "./data.js";
 // load the the content
 const loadContent = () => {
-  // const snippets = JSON.parse(localStorage.getItem("snippets"));
   data.forEach((e) => {
     const container = document.createElement("div");
     container.style.backgroundColor = `${e.color}`;
@@ -19,7 +19,21 @@ const loadContent = () => {
     Body.appendChild(container);
   });
 };
-loadContent();
+// loadContent();
+// filter by language
+const loadFiltered = (lang) => {
+  output.innerHTML = "";
+  data.forEach((e) => {
+    if (e.lang === lang) {
+      const container = document.createElement("div");
+      container.style.backgroundColor = `${e.color}`;
+      container.className = "snippet__container";
+      container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
+      output.appendChild(container);
+    }
+  });
+};
+loadFiltered("Java Script");
 // change header text and color
 
 const changeHeader = (element) => {
@@ -72,5 +86,5 @@ nav__list.addEventListener("click", (e) => {
     ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
         "show"
       )
-    : changeHeader(e.target); //get style of clicked element and change heder text & color
+    : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
 });

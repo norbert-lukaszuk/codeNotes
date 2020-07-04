@@ -12,6 +12,12 @@ const data = [
     tags: ["color", "background"],
     color: "var(--cssColor)",
   },
+  {
+    lang: "Java Script",
+    code: "arr = ['buy','milk']<br>arr.forEach((e)=>{<br>console.log(e)})",
+    tags: ["array", "forEach"],
+    color: "var(--jsColor)",
+  },
 ];
 
 export default data;
