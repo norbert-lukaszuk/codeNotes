@@ -8,6 +8,17 @@ const fog__background = document.querySelector("#fog__background");
 const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
 
+// load the the content
+const loadContent = () => {
+  const snippets = JSON.parse(localStorage.getItem("snippets"));
+  snippets.forEach((e) => {
+    const container = document.createElement("div");
+    container.className = "snippet__container";
+    container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
+    Body.appendChild(container);
+  });
+};
+loadContent();
 // change header text and color
 
 const changeHeader = (element) => {
