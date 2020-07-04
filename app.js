@@ -7,12 +7,13 @@ const nav__wraper = document.querySelector("#nav__wraper");
 const fog__background = document.querySelector("#fog__background");
 const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
-
+import data from "./data.js";
 // load the the content
 const loadContent = () => {
-  const snippets = JSON.parse(localStorage.getItem("snippets"));
-  snippets.forEach((e) => {
+  // const snippets = JSON.parse(localStorage.getItem("snippets"));
+  data.forEach((e) => {
     const container = document.createElement("div");
+    container.style.backgroundColor = `${e.color}`;
     container.className = "snippet__container";
     container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
     Body.appendChild(container);
