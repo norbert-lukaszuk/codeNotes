@@ -16,11 +16,11 @@ const changeHeader = (element) => {
   ).backgroundColor;
   selected.textContent = element.textContent;
   language__list.classList.remove("show");
-  nav__wraper.classList.toggle("nav__wraper--show");
-  fog__background.classList.toggle("fog__background--show");
-  backarrow.classList.toggle("backarrow--show");
-  hamburger.classList.toggle("hamburger--hide");
-  nav__list.classList.toggle("nav__list--show");
+  nav__wraper.classList.remove("nav__wraper--show");
+  fog__background.classList.remove("fog__background--show");
+  backarrow.classList.remove("backarrow--show");
+  hamburger.classList.remove("hamburger--hide");
+  nav__list.classList.remove("nav__list--show");
 };
 
 // background to click for closing
@@ -53,7 +53,12 @@ hamburger.addEventListener("click", () => {
 
 // selecting from nav icons
 nav__list.addEventListener("click", (e) => {
+  console.log(e.target.classList);
   e.target.classList.contains("navList__element")
     ? e.target.nextElementSibling.firstElementChild.classList.toggle("show")
+    : e.target.classList.contains("fas")
+    ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
+        "show"
+      )
     : changeHeader(e.target); //get style of clicked element and change heder text & color
 });
