@@ -7,6 +7,22 @@ const nav__wraper = document.querySelector("#nav__wraper");
 const fog__background = document.querySelector("#fog__background");
 const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
+
+// change header text and color
+
+const changeHeader = (element) => {
+  selected.parentElement.style.backgroundColor = getComputedStyle(
+    element
+  ).backgroundColor;
+  selected.textContent = element.textContent;
+  language__list.classList.remove("show");
+  nav__wraper.classList.toggle("nav__wraper--show");
+  fog__background.classList.toggle("fog__background--show");
+  backarrow.classList.toggle("backarrow--show");
+  hamburger.classList.toggle("hamburger--hide");
+  nav__list.classList.toggle("nav__list--show");
+};
+
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
   console.log(e.target.id);
@@ -37,15 +53,7 @@ hamburger.addEventListener("click", () => {
 
 // selecting from nav icons
 nav__list.addEventListener("click", (e) => {
-  // console.log(e.target.nextElementSibling.firstElementChild.classList);
-  const target = e.target.nextElementSibling.firstElementChild;
-  console.log("target", target.classList);
   e.target.classList.contains("navList__element")
-    ? target.classList.toggle("show")
-    : false;
-  // e.target.nextElementSibling.firstElementChild.classList.toggle("show");
-});
-// select from submenu
-language__list.addEventListener("click", (e) => {
-  console.log(e.target.textContent);
+    ? e.target.nextElementSibling.firstElementChild.classList.toggle("show")
+    : changeHeader(e.target); //get style of clicked element and change heder text & color
 });

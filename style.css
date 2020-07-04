@@ -73,13 +73,13 @@ body {
   box-shadow: 5px 5px 10px var(--grayBackground);
 }
 .language__list li:nth-of-type(1) {
-  background-color: var(--jsColor);
-}
-.language__list li:nth-of-type(2) {
   background-color: var(--cssColor);
 }
-.language__list li:nth-of-type(3) {
+.language__list li:nth-of-type(2) {
   background-color: var(--htmlColor);
+}
+.language__list li:nth-of-type(3) {
+  background-color: var(--jsColor);
 }
 .language__tag {
   padding-top: 10px;
