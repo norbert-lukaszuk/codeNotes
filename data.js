@@ -55,6 +55,12 @@ const data = [
     tags: ["position", "fixed", "mobile"],
     color: "var(--htmlColor)",
   },
+  {
+    lang: "HTML",
+    code: "<h2>Second header</h2>",
+    tags: ["position", "fixed", "mobile"],
+    color: "var(--htmlColor)",
+  },
 ];
 
 export default data;

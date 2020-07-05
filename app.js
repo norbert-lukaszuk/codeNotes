@@ -34,6 +34,26 @@ const changeHeader = (element) => {
   hamburger.classList.remove("hamburger--hide");
   nav__list.classList.remove("nav__list--show");
 };
+// html tag conversion 
+const htmlConversion = (code) => {
+  const splited = code.split("");
+  const indexes = splited.map((e) => {
+    if (e === "<") {
+      return "&lt;"
+    }
+    else if (e === ">") {
+      return "&gt;"
+    }
+    else return e
+
+  })
+  // console.log(indexes)
+  let string = '';
+  indexes.forEach(e => {
+    string += e;
+  })
+  return string
+}
 // filter by language
 const loadFiltered = (lang) => {
   output.innerHTML = "";
@@ -43,6 +63,8 @@ const loadFiltered = (lang) => {
       const container = document.createElement("div");
       container.style.backgroundColor = `${e.color}`;
       container.className = "snippet__container";
+      // lang === "HTML" ? `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(e.code)}</p> <p class="language__tag"></p>` : container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
+      lang === "HTML" ? console.log(htmlConversion(e.code)) : console.log("other");
       container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -88,8 +110,8 @@ nav__list.addEventListener("click", (e) => {
   e.target.classList.contains("navList__element")
     ? e.target.nextElementSibling.firstElementChild.classList.toggle("show")
     : e.target.classList.contains("fas")
-    ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
+      ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
         "show"
       )
-    : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
+      : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
 });
