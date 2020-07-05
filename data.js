@@ -49,6 +49,12 @@ const data = [
     tags: ["array", "forEach"],
     color: "var(--jsColor)",
   },
+  {
+    lang: "HTML",
+    code: "&lt;h1&gt;This is header&lt;/h1&gt;",
+    tags: ["position", "fixed", "mobile"],
+    color: "var(--htmlColor)",
+  },
 ];
 
 export default data;
