@@ -52,6 +52,7 @@ body {
 }
 .header__wraper {
   display: flex;
+  position: fixed;
   justify-content: center;
   align-items: center;
   background-color: var(--headerColor);
@@ -59,6 +60,7 @@ body {
   left: 0;
   width: 100vw;
   height: 55px;
+  z-index: 2;
 }
 
 .hamburger--hide {
@@ -104,6 +106,7 @@ body {
   height: 100vh;
   transform: translateX(-150px);
   transition: all 0.5s ease-out;
+  z-index: 1;
 }
 .nav__wraper--show {
   transform: translateX(0);
@@ -145,6 +148,9 @@ body {
 }
 .navi {
   position: relative;
+}
+.output {
+  margin-top: 60px;
 }
 .show {
   display: block;

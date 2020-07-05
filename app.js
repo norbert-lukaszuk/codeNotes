@@ -38,11 +38,15 @@ const changeHeader = (element) => {
 const loadFiltered = (lang) => {
   output.innerHTML = "";
   data.forEach((e) => {
+    const tags = [...e.tags];
     if (e.lang === lang) {
       const container = document.createElement("div");
       container.style.backgroundColor = `${e.color}`;
       container.className = "snippet__container";
-      container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
+      container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
+      tags.forEach((e) => {
+        container.lastElementChild.textContent += " #" + e;
+      });
       output.appendChild(container);
       changeHeader(e);
     }
