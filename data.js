@@ -52,13 +52,19 @@ const data = [
   {
     lang: "HTML",
     code: "&lt;h1&gt;This is header&lt;/h1&gt;",
+    tags: ["sample", "delete"],
+    color: "var(--htmlColor)",
+  },
+  {
+    lang: "HTML",
+    code: "<meta name='viewport'content='width=device-width, initial-scale=1.0, minimum-scale=1'/>",
     tags: ["position", "fixed", "mobile"],
     color: "var(--htmlColor)",
   },
   {
     lang: "HTML",
-    code: "<h2>Second header</h2>",
-    tags: ["position", "fixed", "mobile"],
+    code: "<link rel='icon' type='image/icon.png'/>",
+    tags: ["favicon", "icon", "browser"],
     color: "var(--htmlColor)",
   },
 ];
