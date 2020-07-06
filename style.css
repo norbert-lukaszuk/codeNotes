@@ -13,6 +13,20 @@
   --cssColor: rgba(31, 112, 235, 0.8);
   --htmlColor: rgba(255, 115, 0, 0.8);
 }
+.add__form{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -8%; 
+  width: 100%;
+  height: 108%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+.add__form--show{
+  display: flex;
+}
 .backarrow {
   opacity: 0;
   pointer-events: none;
@@ -46,7 +60,7 @@ body {
 
 .fog__background {
   position: absolute;
-  /* top: 55px; */
+  top: 60px;
   left: 210px;
   width: 100%;
   height: 100%;
@@ -111,7 +125,7 @@ body {
 .nav__wraper {
   position: absolute;
   left: 0;
-  /* top: 55px; */
+  top: 60px;
   width: 210px;
   height: 100%;
   transform: translateX(-210px);
@@ -160,7 +174,7 @@ body {
   position: relative;
 }
 .output {
-  margin-top: 70px;
+  padding-top: 70px;
 }
 .show {
   display: block;

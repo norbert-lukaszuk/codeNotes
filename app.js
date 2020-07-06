@@ -8,8 +8,18 @@ const fog__background = document.querySelector("#fog__background");
 const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
 const output = document.querySelector("#output");
-const big__screen = document.querySelector("#big__screen");
+const add__form = document.querySelector("#add__form");
+const cancel__button = document.querySelector("#cancel__button")
 import data from "./data.js";
+// hide all navi elements
+const hideAll = () => {
+  language__list.classList.remove("show");
+  nav__wraper.classList.remove("nav__wraper--show");
+  fog__background.classList.remove("fog__background--show");
+  backarrow.classList.remove("backarrow--show");
+  hamburger.classList.remove("hamburger--hide");
+  nav__list.classList.remove("nav__list--show");
+}
 // load the the content
 const loadContent = () => {
   data.forEach((e) => {
@@ -23,17 +33,16 @@ const loadContent = () => {
 // change header text and color
 
 const changeHeader = (element) => {
-  // selected.parentElement.style.backgroundColor = getComputedStyle(
-  //   element
-  // ).backgroundColor;
+
   selected.parentElement.style.backgroundColor = element.color;
   selected.textContent = element.lang;
-  language__list.classList.remove("show");
-  nav__wraper.classList.remove("nav__wraper--show");
-  fog__background.classList.remove("fog__background--show");
-  backarrow.classList.remove("backarrow--show");
-  hamburger.classList.remove("hamburger--hide");
-  nav__list.classList.remove("nav__list--show");
+  hideAll();
+  // language__list.classList.remove("show");
+  // nav__wraper.classList.remove("nav__wraper--show");
+  // fog__background.classList.remove("fog__background--show");
+  // backarrow.classList.remove("backarrow--show");
+  // hamburger.classList.remove("hamburger--hide");
+  // nav__list.classList.remove("nav__list--show");
 };
 
 // html tag conversion 
@@ -101,6 +110,7 @@ backarrow.addEventListener("click", () => {
 });
 // hamburger menu button
 hamburger.addEventListener("click", () => {
+  window.scrollTo(0, 0); // scroll to top of window to see navi
   nav__wraper.classList.toggle("nav__wraper--show");
   fog__background.classList.toggle("fog__background--show");
   backarrow.classList.toggle("backarrow--show");
@@ -119,9 +129,14 @@ nav__list.addEventListener("click", (e) => {
         "show"
       )
       : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
+  if (e.target.id === "add__button") { add__form.classList.toggle("add__form--show"); hideAll() }
+  else if (e.target.classList.contains("fa-plus-circle")) { add__form.classList.toggle("add__form--show"); hideAll() };
 });
+// add snippet 
+// cancel button to cancel adding snippet
+cancel__button.addEventListener('click', () => add__form.classList.remove("add__form--show"))
 
-// click on container show snippet in full screen mode
+// click on container to expand container for all snippet text
 output.addEventListener('click', e => {
   // console.log(e.target.parentElement.firstElementChild);
   if (e.target.classList.contains("snippet__container")) {
@@ -133,12 +148,4 @@ output.addEventListener('click', e => {
     e.target.classList.toggle("snippet__text--expand");
     e.target.parentElement.classList.toggle("snippet__container--expand");
   }
-  // const text = e.target.parentElement.parentElement.children[1].textContent;
-  // e.target.parentElement.parentElement.classList.add("snippet__container--grow");
-  // e.target.parentElement.parentElement.children[1].classList.add("snippet__text--grow");
-  // console.log(e.target.parentElement);
-  // big__screen.firstElementChild.textContent = text;
-  // big__screen.classList.toggle("show")
-
-
 })
