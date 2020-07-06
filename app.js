@@ -8,6 +8,7 @@ const fog__background = document.querySelector("#fog__background");
 const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
 const output = document.querySelector("#output");
+const big__screen = document.querySelector("#big__screen");
 import data from "./data.js";
 // load the the content
 const loadContent = () => {
@@ -117,7 +118,22 @@ nav__list.addEventListener("click", (e) => {
 
 // click on container show snippet in full screen mode
 output.addEventListener('click', e => {
-  if (e.target.classList.contains("fa-expand")) {
-    console.log(e.target.parentElement.parentElement.children[1].textContent)
-  };
+  // console.log(e.target.parentElement.firstElementChild);
+  if (e.target.classList.contains("snippet__container")) {
+    e.target.classList.toggle("snippet__container--expand");
+    // console.log(e.target.children)
+    e.target.children[1].classList.toggle("snippet__text--expand");
+  }
+  else if (e.target.classList.contains("snippet__text")) {
+    e.target.classList.toggle("snippet__text--expand");
+    e.target.parentElement.classList.toggle("snippet__container--expand");
+  }
+  // const text = e.target.parentElement.parentElement.children[1].textContent;
+  // e.target.parentElement.parentElement.classList.add("snippet__container--grow");
+  // e.target.parentElement.parentElement.children[1].classList.add("snippet__text--grow");
+  // console.log(e.target.parentElement);
+  // big__screen.firstElementChild.textContent = text;
+  // big__screen.classList.toggle("show")
+
+
 })

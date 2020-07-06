@@ -32,6 +32,13 @@ const data = [
     color: "var(--jsColor)",
   },
   {
+    lang: "Java Script",
+    code:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident voluptatem quas tempore doloribus iure dolorem voluptate a eum ad earum similique quos, maiores cum nemo est dicta ullam eos et ut numquam perspiciatis? Molestias dolores deserunt veniam numquam optio enim repellat vel blanditiis non iste officiis quis obcaecati voluptatem odit debitis labore fugit, placeat magni unde voluptate et accusamus reprehenderit alias! Molestias, exercitationem! A, exercitationem facere ab quos alias fugiat quaerat qui quo culpa mollitia porro, deleniti corporis facilis minima rerum beatae atque iusto recusandae sapiente. Corporis consequatur eos non soluta, doloribus qui voluptatum exercitationem, laboriosam cumque facere rem ut?",
+    tags: ["ternary", "operator"],
+    color: "var(--jsColor)",
+  },
+  {
     lang: "CSS",
     code: ".element{<br> coolor: red;<br> background-color: green<br>}",
     tags: ["color", "background"],
