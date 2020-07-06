@@ -85,6 +85,8 @@ fog__background.addEventListener("click", (e) => {
     backarrow.classList.toggle("backarrow--show");
     hamburger.classList.toggle("hamburger--hide");
     nav__list.classList.toggle("nav__list--show");
+    language__list.classList.remove("show");
+
   }
 });
 // back arrow for closing navi
@@ -94,6 +96,8 @@ backarrow.addEventListener("click", () => {
   backarrow.classList.toggle("backarrow--show");
   hamburger.classList.toggle("hamburger--hide");
   nav__list.classList.toggle("nav__list--show");
+  language__list.classList.remove("show");
+
 });
 // hamburger menu button
 hamburger.addEventListener("click", () => {
@@ -102,6 +106,7 @@ hamburger.addEventListener("click", () => {
   backarrow.classList.toggle("backarrow--show");
   hamburger.classList.toggle("hamburger--hide");
   nav__list.classList.toggle("nav__list--show");
+
 });
 
 // selecting from nav icons
