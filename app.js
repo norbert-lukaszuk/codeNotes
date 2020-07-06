@@ -63,9 +63,9 @@ const loadFiltered = (lang) => {
       const container = document.createElement("div");
       container.style.backgroundColor = `${e.color}`;
       container.className = "snippet__container";
-      // lang === "HTML" ? `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(e.code)}</p> <p class="language__tag"></p>` : container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
-      lang === "HTML" ? console.log(htmlConversion(e.code)) : console.log("other");
-      container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
+      lang === "HTML" ? container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(e.code)}</p> <p class="language__tag"></p>` : container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
+      // lang === "HTML" ? console.log(htmlConversion(e.code)) : console.log("other");
+      // container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`;
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
       });
