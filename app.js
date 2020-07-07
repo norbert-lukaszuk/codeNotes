@@ -134,7 +134,7 @@ nav__list.addEventListener("click", (e) => {
 });
 // add snippet 
 // cancel button to cancel adding snippet
-cancel__button.addEventListener('click', () => add__form.classList.remove("add__form--show"))
+cancel__button.addEventListener('click', () => add__form.classList.remove("add__form--show"));
 
 // click on container to expand container for all snippet text
 output.addEventListener('click', e => {

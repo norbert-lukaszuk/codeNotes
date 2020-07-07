@@ -42,9 +42,23 @@
     <div class="fog__background" id="fog__background"></div>
   </header>
   <div class="add__form" id="add__form">
-    <div class="buttons__wraper" id="buttons__wraper">
-      <button type="submit">Add</button>
-      <button id="cancel__button">Cancel</button>
+    <div class="form__wraper" id="form__wraper">
+      <form>
+        <div class="radio__wraper" id="radio__wraper">
+          <input type="radio" name="category" id="css">
+          <label for="css">CSS</label>
+          <input type="radio" name="category" id="javaScript">
+          <label for="javaScript">JS</label>
+          <input type="radio" name="category" id="html">
+          <label for="html">HTML</label>
+        </div>
+        <label for="snippet__input">Your code</label>
+        <textarea id="snippet__input" cols="55" rows="10"></textarea>
+      </form>
+      <div class="buttons__wraper" id="buttons__wraper">
+        <button type="submit">Add</button>
+        <button id="cancel__button">Cancel</button>
+      </div>
     </div>
   </div>
   <div class="output" id="output"></div>
