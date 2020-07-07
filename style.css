@@ -41,6 +41,21 @@ body {
   width: 100vw;
   position: relative;
 }
+.buttons__wraper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.buttons__wraper button{
+  min-width: 60px;
+  padding: 10px 5px;
+  border-radius: 10px;
+  border: none;
+  margin: 0 10px;
+  box-shadow: 3px 3px 7px var(--grayBackground);
+
+}
 .container__menu {
   display: none;
   position: absolute;
@@ -80,12 +95,15 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 5px;
+  
 }
 .form__wraper label{
   display: block;
+  padding: 5px;
 }
 .form__wraper textarea{
-  margin: 5px;
+  margin: 0 5px;
   padding: 3px;
 }
 
