@@ -1,6 +1,7 @@
 const hamburger = document.querySelector("#hamburger");
 const header__wraper = document.querySelector("#header__wraper");
 const selected = document.querySelector("#selected");
+const input__form = document.querySelector("#input__form");
 const language__list = document.querySelector("#language__list");
 const nav__list = document.querySelector("#nav__list");
 const nav__wraper = document.querySelector("#nav__wraper");
@@ -133,6 +134,7 @@ nav__list.addEventListener("click", (e) => {
 cancel__button.addEventListener("click", (e) => {
   add__form.classList.remove("add__form--show");
   e.preventDefault(); //because cancel__button is inside form & that causes page refresh
+  input__form.reset();
 });
 
 // click on container to expand container for all snippet text
