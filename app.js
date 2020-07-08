@@ -18,8 +18,7 @@ class Snippet {
   constructor(lang, code, tags, color) {
     this.lang = lang;
     this.code = code;
-    this.tags = tags,
-      this.color = color
+    (this.tags = tags), (this.color = color);
   }
 }
 
@@ -78,8 +77,8 @@ const loadFiltered = (lang) => {
       container.className = "snippet__container";
       lang === "HTML"
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-          e.code
-        )}</p> <p class="language__tag"></p>`)
+            e.code
+          )}</p> <p class="language__tag"></p>`)
         : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -89,7 +88,7 @@ const loadFiltered = (lang) => {
     }
   });
 };
-loadFiltered("Java Script");
+loadFiltered("JavaScript");
 
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
@@ -128,10 +127,10 @@ nav__list.addEventListener("click", (e) => {
   e.target.classList.contains("navList__element")
     ? e.target.nextElementSibling.firstElementChild.classList.toggle("show")
     : e.target.classList.contains("fas")
-      ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
+    ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
         "show"
       )
-      : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
+    : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
   if (e.target.id === "add__button") {
     add__form.classList.toggle("add__form--show");
     hideAll();
@@ -144,18 +143,30 @@ nav__list.addEventListener("click", (e) => {
 // submit form to add the snippet
 input__form.addEventListener("submit", (e) => {
   e.preventDefault();
+  // sending data to firestore
   let newSnippet = new Snippet();
-  let arr = input__form.tags__input.value.split(' ');
+  let arr = input__form.tags__input.value.split(" ");
   let tagged = [];
   tagged = arr.map((e) => "#" + e);
   newSnippet.tags = tagged;
   newSnippet.code = input__form.snippet__input.value;
   const category = document.getElementsByName("category");
-  category.forEach(e => {
-    if (e.checked) { newSnippet.color = e.dataset.color; newSnippet.lang = e.value }
-  })
+  category.forEach((e) => {
+    if (e.checked) {
+      newSnippet.color = e.dataset.color;
+      newSnippet.lang = e.value;
+    }
+  });
   console.log(newSnippet);
-})
+  db.collection(`data/codeNotes/${newSnippet.lang}/`)
+    .add({
+      lang: newSnippet.lang,
+      code: newSnippet.code,
+      tags: newSnippet.tags,
+      color: newSnippet.color,
+    })
+    .catch((err) => console.error(err));
+});
 // cancel button to cancel adding snippet
 cancel__button.addEventListener("click", (e) => {
   add__form.classList.remove("add__form--show");
