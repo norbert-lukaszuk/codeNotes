@@ -144,11 +144,17 @@ nav__list.addEventListener("click", (e) => {
 // submit form to add the snippet
 input__form.addEventListener("submit", (e) => {
   e.preventDefault();
+  let newSnippet = new Snippet();
   let arr = input__form.tags__input.value.split(' ');
   let tagged = [];
-  tagged = arr.map((e) => "#" + e)
-  console.log(tagged);
-  console.log(input__form.category.value, snippet__input.dataset.color);
+  tagged = arr.map((e) => "#" + e);
+  newSnippet.tags = tagged;
+  newSnippet.code = input__form.snippet__input.value;
+  const category = document.getElementsByName("category");
+  category.forEach(e => {
+    if (e.checked) { newSnippet.color = e.dataset.color; newSnippet.lang = e.value }
+  })
+  console.log(newSnippet);
 })
 // cancel button to cancel adding snippet
 cancel__button.addEventListener("click", (e) => {
