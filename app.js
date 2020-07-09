@@ -12,7 +12,9 @@ const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
 const submit__button = document.querySelector("#submit__button");
 const cancel__button = document.querySelector("#cancel__button");
+let Actual = 'JavaScript';
 import data from "./data.js";
+
 class Snippet {
   constructor(lang, code, tags, color) {
     this.lang = lang;
@@ -35,8 +37,17 @@ const loadContent = (data) => {
   const container = document.createElement("div");
   container.style.backgroundColor = `${data.color}`;
   container.className = "snippet__container";
-  container.innerHTML = `<p class="snippet__text">${data.code}</p> <p class="language__tag">${data.lang}</p>`;
-  Body.appendChild(container);
+  data.lang === "HTML"
+    ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
+      data.code
+    )}</p> <p class="language__tag"></p>`)
+    : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
+  data.tags.forEach((e) => {
+    container.lastElementChild.textContent += " " + e;
+  });
+  output.appendChild(container);
+  // changeHeader(e);
+
 
 };
 // change header text and color
@@ -86,9 +97,9 @@ const loadFiltered = (lang) => {
     }
   });
 };
-loadFiltered("JavaScript");
+// loadFiltered("JavaScript");
 // realtime listener firestore
-db.collection('data/codeNotes/JavaScript').onSnapshot(snapshot => {
+db.collection(`data/codeNotes/${Actual}`).onSnapshot(snapshot => {
   let changes = snapshot.docChanges();
   changes.forEach(change => {
     const data = change.doc.data();
@@ -137,7 +148,7 @@ nav__list.addEventListener("click", (e) => {
       ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
         "show"
       )
-      : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
+      : Actual = e.target.textContent;/* loadFiltered(e.target.textContent) */ //get style of clicked element and change heder text & color
   if (e.target.id === "add__button") {
     add__form.classList.toggle("add__form--show");
     hideAll();
@@ -145,6 +156,7 @@ nav__list.addEventListener("click", (e) => {
     add__form.classList.toggle("add__form--show");
     hideAll();
   }
+  console.log(Actual);
 });
 // add snippet
 // submit form to add the snippet
