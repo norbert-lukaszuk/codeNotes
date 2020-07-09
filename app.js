@@ -12,7 +12,7 @@ const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
 const submit__button = document.querySelector("#submit__button");
 const cancel__button = document.querySelector("#cancel__button");
-let Actual = 'JavaScript';
+let Actual = "JavaScript";
 import data from "./data.js";
 
 class Snippet {
@@ -39,16 +39,14 @@ const loadContent = (data) => {
   container.className = "snippet__container";
   data.lang === "HTML"
     ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-      data.code
-    )}</p> <p class="language__tag"></p>`)
+        data.code
+      )}</p> <p class="language__tag"></p>`)
     : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
   });
   output.appendChild(container);
   // changeHeader(e);
-
-
 };
 // change header text and color
 
@@ -86,8 +84,8 @@ const loadFiltered = (lang) => {
       container.className = "snippet__container";
       lang === "HTML"
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-          e.code
-        )}</p> <p class="language__tag"></p>`)
+            e.code
+          )}</p> <p class="language__tag"></p>`)
         : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -97,16 +95,15 @@ const loadFiltered = (lang) => {
     }
   });
 };
-// loadFiltered("JavaScript");
-// realtime listener firestore
-db.collection(`data/codeNotes/${Actual}`).onSnapshot(snapshot => {
-  let changes = snapshot.docChanges();
-  changes.forEach(change => {
-    const data = change.doc.data();
-    loadContent(data);
-
+// load content first time
+db.collection(`data/codeNotes/${Actual}`)
+  .get()
+  .then((doc) => {
+    doc.forEach((e) => {
+      loadContent(e.data());
+      changeHeader(e.data());
+    });
   });
-})
 
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
@@ -142,14 +139,27 @@ hamburger.addEventListener("click", () => {
 // selecting from nav icons
 nav__list.addEventListener("click", (e) => {
   console.log(e.target.classList);
-  e.target.classList.contains("navList__element")
-    ? e.target.nextElementSibling.firstElementChild.classList.toggle("show")
-    : e.target.classList.contains("fas")
-      ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
-        "show"
-      )
-      : Actual = e.target.textContent;/* loadFiltered(e.target.textContent) */ //get style of clicked element and change heder text & color
-  if (e.target.id === "add__button") {
+  if (e.target.classList.contains("navList__element")) {
+    e.target.nextElementSibling.firstElementChild.classList.toggle("show");
+  } else if (e.target.classList.contains("fas")) {
+    e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
+      "show"
+    );
+  } else {
+    Actual = e.target.textContent;
+    db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
+      output.innerHTML = ""; // reset the output
+      let changes = snapshot.docChanges();
+      changes.forEach((change) => {
+        const data = change.doc.data();
+        loadContent(data);
+        changeHeader(data);
+        hideAll();
+      });
+    });
+  } //get style of clicked element and change heder text & color
+
+  /* loadFiltered(e.target.textContent) */ if (e.target.id === "add__button") {
     add__form.classList.toggle("add__form--show");
     hideAll();
   } else if (e.target.classList.contains("fa-plus-circle")) {
