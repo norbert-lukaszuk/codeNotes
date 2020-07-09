@@ -13,7 +13,6 @@ const add__form = document.querySelector("#add__form");
 const submit__button = document.querySelector("#submit__button");
 const cancel__button = document.querySelector("#cancel__button");
 import data from "./data.js";
-
 class Snippet {
   constructor(lang, code, tags, color) {
     this.lang = lang;
@@ -32,14 +31,13 @@ const hideAll = () => {
   nav__list.classList.remove("nav__list--show");
 };
 // load the the content
-const loadContent = () => {
-  data.forEach((e) => {
-    const container = document.createElement("div");
-    container.style.backgroundColor = `${e.color}`;
-    container.className = "snippet__container";
-    container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag">${e.lang}</p>`;
-    Body.appendChild(container);
-  });
+const loadContent = (data) => {
+  const container = document.createElement("div");
+  container.style.backgroundColor = `${data.color}`;
+  container.className = "snippet__container";
+  container.innerHTML = `<p class="snippet__text">${data.code}</p> <p class="language__tag">${data.lang}</p>`;
+  Body.appendChild(container);
+
 };
 // change header text and color
 
@@ -77,8 +75,8 @@ const loadFiltered = (lang) => {
       container.className = "snippet__container";
       lang === "HTML"
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-            e.code
-          )}</p> <p class="language__tag"></p>`)
+          e.code
+        )}</p> <p class="language__tag"></p>`)
         : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -89,6 +87,15 @@ const loadFiltered = (lang) => {
   });
 };
 loadFiltered("JavaScript");
+// realtime listener firestore
+db.collection('data/codeNotes/JavaScript').onSnapshot(snapshot => {
+  let changes = snapshot.docChanges();
+  changes.forEach(change => {
+    const data = change.doc.data();
+    loadContent(data);
+
+  });
+})
 
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
@@ -127,10 +134,10 @@ nav__list.addEventListener("click", (e) => {
   e.target.classList.contains("navList__element")
     ? e.target.nextElementSibling.firstElementChild.classList.toggle("show")
     : e.target.classList.contains("fas")
-    ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
+      ? e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
         "show"
       )
-    : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
+      : loadFiltered(e.target.textContent); //get style of clicked element and change heder text & color
   if (e.target.id === "add__button") {
     add__form.classList.toggle("add__form--show");
     hideAll();
