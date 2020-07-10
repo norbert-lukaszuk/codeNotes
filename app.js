@@ -10,7 +10,6 @@ const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
 const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
-const submit__button = document.querySelector("#submit__button");
 const cancel__button = document.querySelector("#cancel__button");
 let Actual = "JavaScript";
 import data from "./data.js";
@@ -31,25 +30,43 @@ const hideAll = () => {
   backarrow.classList.remove("backarrow--show");
   hamburger.classList.remove("hamburger--hide");
   nav__list.classList.remove("nav__list--show");
+
 };
-// load the the content
+// load the the one container in output
 const loadContent = (data) => {
   const container = document.createElement("div");
   container.style.backgroundColor = `${data.color}`;
   container.className = "snippet__container";
   data.lang === "HTML"
     ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-        data.code
-      )}</p> <p class="language__tag"></p>`)
+      data.code
+    )}</p> <p class="language__tag"></p>`)
     : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
   });
   output.appendChild(container);
-  // changeHeader(e);
 };
-// change header text and color
 
+// get data from firestore once
+const getDataOnce = () => {
+  db.collection(`data/codeNotes/${Actual}`)
+    .get()
+    .then((doc) => {
+      doc.forEach((e) => {
+        loadContent(e.data());
+        changeHeader(e.data());
+      });
+    });
+}
+// unsubscribe from firestore liveupdate to load data correctly after changing language to show
+const unsubscribe = db.collection(`data/codeNotes/${Actual}`)
+  .onSnapshot(function (resp) {
+    console.log(resp)
+
+  })
+
+// change header text and color
 const changeHeader = (element) => {
   selected.parentElement.style.backgroundColor = element.color;
   selected.textContent = element.lang;
@@ -84,8 +101,8 @@ const loadFiltered = (lang) => {
       container.className = "snippet__container";
       lang === "HTML"
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-            e.code
-          )}</p> <p class="language__tag"></p>`)
+          e.code
+        )}</p> <p class="language__tag"></p>`)
         : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -96,14 +113,7 @@ const loadFiltered = (lang) => {
   });
 };
 // load content first time
-db.collection(`data/codeNotes/${Actual}`)
-  .get()
-  .then((doc) => {
-    doc.forEach((e) => {
-      loadContent(e.data());
-      changeHeader(e.data());
-    });
-  });
+getDataOnce();
 
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
@@ -147,8 +157,9 @@ nav__list.addEventListener("click", (e) => {
     );
   } else {
     Actual = e.target.textContent;
+    output.innerHTML = ""; // reset the output
+    unsubscribe();
     db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
-      output.innerHTML = ""; // reset the output
       let changes = snapshot.docChanges();
       changes.forEach((change) => {
         const data = change.doc.data();
@@ -159,7 +170,8 @@ nav__list.addEventListener("click", (e) => {
     });
   } //get style of clicked element and change heder text & color
 
-  /* loadFiltered(e.target.textContent) */ if (e.target.id === "add__button") {
+  // add button click
+  if (e.target.id === "add__button") {
     add__form.classList.toggle("add__form--show");
     hideAll();
   } else if (e.target.classList.contains("fa-plus-circle")) {
@@ -187,6 +199,7 @@ input__form.addEventListener("submit", (e) => {
     }
   });
   console.log(newSnippet);
+  // adding to firestore procedure
   db.collection(`data/codeNotes/${newSnippet.lang}/`)
     .add({
       lang: newSnippet.lang,
@@ -195,6 +208,8 @@ input__form.addEventListener("submit", (e) => {
       color: newSnippet.color,
     })
     .catch((err) => console.error(err));
+  // close add__form after sending data to firestore
+  add__form.classList.remove("add__form--show");
 });
 // cancel button to cancel adding snippet
 cancel__button.addEventListener("click", (e) => {
@@ -205,11 +220,11 @@ cancel__button.addEventListener("click", (e) => {
 
 // click on container to expand container for all snippet text
 output.addEventListener("click", (e) => {
-  // console.log(e.target.parentElement.firstElementChild);
+  // expand after click on click on container
   if (e.target.classList.contains("snippet__container")) {
     e.target.classList.toggle("snippet__container--expand");
-    // console.log(e.target.children)
     e.target.children[1].classList.toggle("snippet__text--expand");
+    // expand after click on text
   } else if (e.target.classList.contains("snippet__text")) {
     e.target.classList.toggle("snippet__text--expand");
     e.target.parentElement.classList.toggle("snippet__container--expand");
