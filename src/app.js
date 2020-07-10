@@ -3,6 +3,8 @@ const header__wraper = document.querySelector("#header__wraper");
 const selected = document.querySelector("#selected");
 const input__form = document.querySelector("#input__form");
 const language__list = document.querySelector("#language__list");
+const login__form = document.querySelector("#login__form");
+const login__wraper = document.querySelector("#login__wraper");
 const nav__list = document.querySelector("#nav__list");
 const nav__wraper = document.querySelector("#nav__wraper");
 const fog__background = document.querySelector("#fog__background");
@@ -12,7 +14,6 @@ const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
 const cancel__button = document.querySelector("#cancel__button");
 let Actual = "JavaScript";
-import data from "./data.js";
 
 class Snippet {
   constructor(lang, code, tags, color) {
@@ -114,7 +115,13 @@ const loadFiltered = (lang) => {
 };
 // load content first time
 getDataOnce();
+// login form
 
+login__form.addEventListener("submit", e => {
+  e.preventDefault();
+  console.log(login__form.user__email.value, login__form.user__password.value);
+  login__form.reset();
+})
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
   console.log(e.target.id);
@@ -177,6 +184,9 @@ nav__list.addEventListener("click", (e) => {
   } else if (e.target.classList.contains("fa-plus-circle")) {
     add__form.classList.toggle("add__form--show");
     hideAll();
+  }
+  if (e.target.id === "user__button") {
+    login__wraper.classList.toggle("login__wraper--show");
   }
   console.log(Actual);
 });
