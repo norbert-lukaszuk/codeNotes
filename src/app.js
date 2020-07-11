@@ -13,6 +13,7 @@ const Body = document.querySelector("body");
 const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
 const cancel__button = document.querySelector("#cancel__button");
+const login__cancel = document.querySelector("#login__cancel");
 let Actual = "JavaScript";
 
 class Snippet {
@@ -122,6 +123,11 @@ login__form.addEventListener("submit", e => {
   console.log(login__form.user__email.value, login__form.user__password.value);
   login__form.reset();
 })
+// login cancel
+login__cancel.addEventListener('click', e => {
+  login__wraper.classList.toggle("login__wraper--show");
+  login__form.reset();
+})
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
   console.log(e.target.id);
@@ -156,13 +162,13 @@ hamburger.addEventListener("click", () => {
 // selecting from nav icons
 nav__list.addEventListener("click", (e) => {
   console.log(e.target.classList);
-  if (e.target.classList.contains("navList__element")) {
+  if (e.target.classList.contains("submenu")) {
     e.target.nextElementSibling.firstElementChild.classList.toggle("show");
-  } else if (e.target.classList.contains("fas")) {
+  } else if (e.target.classList.contains("fa-code")) {
     e.target.parentElement.nextElementSibling.firstElementChild.classList.toggle(
       "show"
     );
-  } else {
+  } else if (e.target.classList.contains("languageList__item")) {
     Actual = e.target.textContent;
     output.innerHTML = ""; // reset the output
     unsubscribe();
@@ -185,7 +191,7 @@ nav__list.addEventListener("click", (e) => {
     add__form.classList.toggle("add__form--show");
     hideAll();
   }
-  if (e.target.id === "user__button") {
+  if (e.target.id === "user__button" || e.target.classList.contains('fa-user')) {
     login__wraper.classList.toggle("login__wraper--show");
   }
   console.log(Actual);
