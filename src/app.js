@@ -121,7 +121,21 @@ getDataOnce();
 login__form.addEventListener("submit", e => {
   e.preventDefault();
   console.log(login__form.user__email.value, login__form.user__password.value);
+  const user = login__form.user__email.value;
+  const password = login__form.user__password.value;
+  auth.signInWithEmailAndPassword(user, password)
+    .then(db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
+      let changes = snapshot.docChanges();
+      changes.forEach((change) => {
+        const data = change.doc.data();
+        loadContent(data);
+        changeHeader(data);
+
+      });
+    }))
   login__form.reset();
+  login__wraper.classList.remove("login__wraper--show");
+
 })
 // login cancel
 login__cancel.addEventListener('click', e => {
