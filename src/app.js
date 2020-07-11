@@ -32,7 +32,6 @@ const hideAll = () => {
   backarrow.classList.remove("backarrow--show");
   hamburger.classList.remove("hamburger--hide");
   nav__list.classList.remove("nav__list--show");
-
 };
 // load the the one container in output
 const loadContent = (data) => {
@@ -41,8 +40,8 @@ const loadContent = (data) => {
   container.className = "snippet__container";
   data.lang === "HTML"
     ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-      data.code
-    )}</p> <p class="language__tag"></p>`)
+        data.code
+      )}</p> <p class="language__tag"></p>`)
     : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
@@ -60,13 +59,13 @@ const getDataOnce = () => {
         changeHeader(e.data());
       });
     });
-}
+};
 // unsubscribe from firestore liveupdate to load data correctly after changing language to show
-const unsubscribe = db.collection(`data/codeNotes/${Actual}`)
+const unsubscribe = db
+  .collection(`data/codeNotes/${Actual}`)
   .onSnapshot(function (resp) {
-    console.log(resp)
-
-  })
+    console.log(resp);
+  });
 
 // change header text and color
 const changeHeader = (element) => {
@@ -103,8 +102,8 @@ const loadFiltered = (lang) => {
       container.className = "snippet__container";
       lang === "HTML"
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-          e.code
-        )}</p> <p class="language__tag"></p>`)
+            e.code
+          )}</p> <p class="language__tag"></p>`)
         : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -116,32 +115,35 @@ const loadFiltered = (lang) => {
 };
 // load content first time
 getDataOnce();
-// login form
 
-login__form.addEventListener("submit", e => {
+// login procedure
+
+login__form.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log(login__form.user__email.value, login__form.user__password.value);
   const user = login__form.user__email.value;
   const password = login__form.user__password.value;
-  auth.signInWithEmailAndPassword(user, password)
-    .then(db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
+  auth.signInWithEmailAndPassword(user, password).then(() => {
+    db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
       let changes = snapshot.docChanges();
       changes.forEach((change) => {
         const data = change.doc.data();
         loadContent(data);
         changeHeader(data);
-
       });
-    }))
+    });
+  });
   login__form.reset();
+  login__cancel.textContent = "Logout";
   login__wraper.classList.remove("login__wraper--show");
+});
 
-})
 // login cancel
-login__cancel.addEventListener('click', e => {
+login__cancel.addEventListener("click", (e) => {
   login__wraper.classList.toggle("login__wraper--show");
   login__form.reset();
-})
+});
+
 // background to click for closing
 fog__background.addEventListener("click", (e) => {
   console.log(e.target.id);
@@ -205,7 +207,10 @@ nav__list.addEventListener("click", (e) => {
     add__form.classList.toggle("add__form--show");
     hideAll();
   }
-  if (e.target.id === "user__button" || e.target.classList.contains('fa-user')) {
+  if (
+    e.target.id === "user__button" ||
+    e.target.classList.contains("fa-user")
+  ) {
     login__wraper.classList.toggle("login__wraper--show");
   }
   console.log(Actual);

@@ -148,7 +148,7 @@ body {
 .language__tag {
   padding-top: 10px;
 }
-.login__wraper{
+.login__wraper {
   display: none;
   position: absolute;
   width: 100%;
@@ -156,12 +156,11 @@ body {
   top: 60px;
   z-index: 3;
   background-color: var(--grayBackground);
-  
 }
-.login__wraper--show{
+.login__wraper--show {
   display: block;
 }
-.login__wraper form{
+.login__wraper form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,6 +213,9 @@ body {
 }
 .navList__element:nth-child(4) {
   background-color: #e9c46a;
+}
+.navList__element:nth-child(5) {
+  background-color: #2a9d8f;
 }
 .navi {
   position: relative;
