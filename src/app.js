@@ -48,7 +48,18 @@ const loadContent = (data) => {
   });
   output.appendChild(container);
 };
+// set onSnapshot 
+const setOnSnapshot = () => {
+  db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
+    let changes = snapshot.docChanges();
+    changes.forEach((change) => {
+      const data = change.doc.data();
+      loadContent(data);
+      changeHeader(data);
+    });
+  });
 
+}
 // get data from firestore once
 const getDataOnce = () => {
   db.collection(`data/codeNotes/${Actual}`)
@@ -114,7 +125,7 @@ const loadFiltered = (lang) => {
   });
 };
 // load content first time
-// getDataOnce();
+setOnSnapshot();
 
 // login procedure
 

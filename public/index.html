@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
-  <link rel="icon" type="image/png" href="assets/img/pngguru.com.png
-    " />
+  <link rel="icon" type="image/png" href="scisors.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
     integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
-  <script src="CodeSnippets.js"></script>
   <title>Code Notes</title>
 </head>
 
@@ -25,7 +23,7 @@
           <li class="navList__element" id="add__button">
             <i class="fas fa-plus-circle fa-2x"></i>
           </li>
-          <li class="navList__element"><i class="fas fa-code fa-2x"></i></li>
+          <li class="navList__element submenu"><i class="fas fa-code fa-2x"></i></li>
           <li>
             <ul class="language__list" id="language__list">
               <li class="languageList__item">CSS</li>
@@ -36,11 +34,27 @@
           <li class="navList__element">
             <i class="fas fa-filter fa-2x"></i>
           </li>
+          <li class="navList__element" id="user__button">
+            <i class="fas fa-user fa-2x"></i>
+          </li>
         </ul>
       </nav>
     </div>
     <div class="fog__background" id="fog__background"></div>
   </header>
+  <div class="login__wraper" id="login__wraper">
+    <form class="login__form" id="login__form">
+      <label for="user__email">Your email</label>
+      <input type="email" id="user__email">
+      <label for="user__password">Password</label>
+      <input type="password" id="user__password">
+      <div class="form__butons">
+        <button type="submit">Login</button>
+        <button id="login__cancel">Cancel</button>
+      </div>
+    </form>
+
+  </div>
   <div class="add__form" id="add__form">
     <div class="form__wraper" id="form__wraper">
       <form id="input__form">
