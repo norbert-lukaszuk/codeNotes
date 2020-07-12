@@ -40,8 +40,8 @@ const loadContent = (data) => {
   container.className = "snippet__container";
   data.lang === "HTML"
     ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-        data.code
-      )}</p> <p class="language__tag"></p>`)
+      data.code
+    )}</p> <p class="language__tag"></p>`)
     : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
@@ -102,8 +102,8 @@ const loadFiltered = (lang) => {
       container.className = "snippet__container";
       lang === "HTML"
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-            e.code
-          )}</p> <p class="language__tag"></p>`)
+          e.code
+        )}</p> <p class="language__tag"></p>`)
         : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
@@ -114,7 +114,7 @@ const loadFiltered = (lang) => {
   });
 };
 // load content first time
-getDataOnce();
+// getDataOnce();
 
 // login procedure
 
