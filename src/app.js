@@ -137,7 +137,6 @@ login__form.addEventListener("submit", (e) => {
     setOnSnapshot();
   });
   login__form.reset();
-  login__cancel.textContent = "Logout";
   login__wraper.classList.remove("login__wraper--show");
 });
 
@@ -145,6 +144,7 @@ login__form.addEventListener("submit", (e) => {
 login__cancel.addEventListener("click", (e) => {
   login__wraper.classList.toggle("login__wraper--show");
   login__form.reset();
+  hideAll();
 });
 
 // background to click for closing
@@ -215,6 +215,7 @@ nav__list.addEventListener("click", (e) => {
     e.target.classList.contains("fa-user")
   ) {
     login__wraper.classList.toggle("login__wraper--show");
+    hideAll();
   }
   console.log(Actual);
 });
