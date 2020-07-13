@@ -385,3 +385,13 @@ body {
   border: 2px solid var(--grayBackground);
   border-radius: 3px;
 }
+
+@media(min-width: 560px){
+.snippet__text{
+  width: 530px;
+  overflow: hidden;
+}
+.snippet__container{
+  width: 550px;
+}
+}

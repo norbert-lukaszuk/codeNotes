@@ -42,7 +42,7 @@ const loadContent = (data) => {
     ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
       data.code
     )}</p> <p class="language__tag"></p>`)
-    : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
+    : (container.innerHTML = `<p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
   });
@@ -115,7 +115,7 @@ const loadFiltered = (lang) => {
         ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
           e.code
         )}</p> <p class="language__tag"></p>`)
-        : (container.innerHTML = `<div class="container__menu"><i class="fas fa-expand fa-2x"></i><i class="far fa-edit fa-2x"></i></div><p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
+        : (container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
       tags.forEach((e) => {
         container.lastElementChild.textContent += " #" + e;
       });
