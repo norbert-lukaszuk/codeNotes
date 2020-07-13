@@ -1,152 +1,120 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      href="assets/img/pngguru.com.png
-    "
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-      integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <!-- <script src="CodeSnippets.js"></script> -->
-    <title>Code Notes</title>
-  </head>
 
-  <body>
-    <header>
-      <div class="header__wraper" id="header__wraper">
-        <i class="hamburger fas fa-bars fa-2x" id="hamburger"></i>
-        <p class="selected" id="selected">Java Script</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
+  <link rel="icon" type="image/png" href="assets/img/pngguru.com.png
+    " />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js"
+    integrity="sha512-rYNMWcr8EuYc/6mSBu0wD+hSoA4KkHvYRlmJEJGQI4bsho0OiX8fPOVB822QQZizkTUdkUCnJLnN8SAUBg9y9w=="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <title>Code Notes</title>
+</head>
+
+<body>
+  <header>
+    <div class="header__wraper" id="header__wraper">
+      <i class="hamburger fas fa-bars fa-2x" id="hamburger"></i>
+      <p class="selected" id="selected">Java Script</p>
+    </div>
+    <div class="nav__wraper" id="nav__wraper">
+      <nav class="navi">
+        <i class="backarrow fas fa-angle-double-left fa-3x" id="backarrow"></i>
+        <ul class="nav__list" id="nav__list">
+          <li class="navList__element" id="add__button">
+            <i class="fas fa-plus-circle fa-2x"></i>
+          </li>
+          <li class="navList__element submenu">
+            <i class="fas fa-code fa-2x"></i>
+          </li>
+          <li>
+            <ul class="language__list" id="language__list">
+              <li class="languageList__item">CSS</li>
+              <li class="languageList__item">HTML</li>
+              <li class="languageList__item">JavaScript</li>
+            </ul>
+          </li>
+          <li class="navList__element">
+            <i class="fas fa-filter fa-2x"></i>
+          </li>
+          <li class="navList__element" id="user__button">
+            <i class="fas fa-user fa-2x"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="fog__background" id="fog__background"></div>
+  </header>
+  <div class="login__wraper" id="login__wraper">
+    <form class="login__form" id="login__form">
+      <div class="input__wraper">
+        <input type="email" id="user__email" required />
+        <label for="user__email">Your email</label>
       </div>
-      <div class="nav__wraper" id="nav__wraper">
-        <nav class="navi">
-          <i
-            class="backarrow fas fa-angle-double-left fa-3x"
-            id="backarrow"
-          ></i>
-          <ul class="nav__list" id="nav__list">
-            <li class="navList__element" id="add__button">
-              <i class="fas fa-plus-circle fa-2x"></i>
-            </li>
-            <li class="navList__element submenu">
-              <i class="fas fa-code fa-2x"></i>
-            </li>
-            <li>
-              <ul class="language__list" id="language__list">
-                <li class="languageList__item">CSS</li>
-                <li class="languageList__item">HTML</li>
-                <li class="languageList__item">JavaScript</li>
-              </ul>
-            </li>
-            <li class="navList__element">
-              <i class="fas fa-filter fa-2x"></i>
-            </li>
-            <li class="navList__element" id="user__button">
-              <i class="fas fa-user fa-2x"></i>
-            </li>
-          </ul>
-        </nav>
+      <div class="input__wraper">
+        <input type="password" id="user__password" required />
+        <label for="user__password">Password</label>
       </div>
-      <div class="fog__background" id="fog__background"></div>
-    </header>
-    <div class="login__wraper" id="login__wraper">
-      <form class="login__form" id="login__form">
-        <div class="input__wraper">
-          <input type="email" id="user__email" required />
-          <label for="user__email">Your email</label>
+      <div class="form__buttons">
+        <button type="submit">Login</button>
+        <button id="login__cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <div class="add__form" id="add__form">
+    <div class="form__wraper" id="form__wraper">
+      <form id="input__form">
+        <div class="radio__wraper" id="radio__wraper">
+          <input type="radio" name="category" id="css" value="CSS" data-color="var(--cssColor)" />
+          <label for="css">CSS</label>
+          <input type="radio" name="category" id="javaScript" value="JavaScript" data-color="var(--jsColor)" />
+          <label for="javaScript">JS</label>
+          <input type="radio" name="category" id="html" value="HTML" data-color="var(--htmlColor)" />
+          <label for="html">HTML</label>
         </div>
-        <div class="input__wraper">
-          <input type="password" id="user__password" required />
-          <label for="user__password">Password</label>
+        <div class="textarea__wraper" id="textarea__wraper">
+          <!-- <label for="snippet__input">Your code</label> -->
+          <i class="fas fa-code"></i>
+          <textarea id="snippet__input" cols="55" rows="8" data-color="var(--cssColor)"></textarea>
         </div>
-        <div class="form__buttons">
-          <button type="submit">Login</button>
-          <button id="login__cancel">Cancel</button>
+        <div class="tags__wraper" id="tags__wraper">
+          <!-- <label for="tags__input">#</label> -->
+          <i class="fas fa-hashtag"></i>
+          <input type="text" id="tags__input" placeholder="#hashtags" />
+        </div>
+        <div class="buttons__wraper" id="buttons__wraper">
+          <button type="submit" id="submit__button">Add</button>
+          <button id="cancel__button">Cancel</button>
         </div>
       </form>
     </div>
-    <div class="add__form" id="add__form">
-      <div class="form__wraper" id="form__wraper">
-        <form id="input__form">
-          <div class="radio__wraper" id="radio__wraper">
-            <input
-              type="radio"
-              name="category"
-              id="css"
-              value="CSS"
-              data-color="var(--cssColor)"
-            />
-            <label for="css">CSS</label>
-            <input
-              type="radio"
-              name="category"
-              id="javaScript"
-              value="JavaScript"
-              data-color="var(--jsColor)"
-            />
-            <label for="javaScript">JS</label>
-            <input
-              type="radio"
-              name="category"
-              id="html"
-              value="HTML"
-              data-color="var(--htmlColor)"
-            />
-            <label for="html">HTML</label>
-          </div>
-          <div class="textarea__wraper" id="textarea__wraper">
-            <!-- <label for="snippet__input">Your code</label> -->
-            <i class="fas fa-code"></i>
-            <textarea
-              id="snippet__input"
-              cols="55"
-              rows="8"
-              data-color="var(--cssColor)"
-            ></textarea>
-          </div>
-          <div class="tags__wraper" id="tags__wraper">
-            <!-- <label for="tags__input">#</label> -->
-            <i class="fas fa-hashtag"></i>
-            <input type="text" id="tags__input" placeholder="#hashtags" />
-          </div>
-          <div class="buttons__wraper" id="buttons__wraper">
-            <button type="submit" id="submit__button">Add</button>
-            <button id="cancel__button">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="output" id="output"></div>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+  </div>
+  <div class="output" id="output"></div>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
 
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyDzvO7xqa9bwmCF5fRwX3fcRMME7pjyOmk",
-        authDomain: "codecheatsheet-7d13a.firebaseapp.com",
-        databaseURL: "https://codecheatsheet-7d13a.firebaseio.com",
-        projectId: "codecheatsheet-7d13a",
-        storageBucket: "codecheatsheet-7d13a.appspot.com",
-        messagingSenderId: "147725314310",
-        appId: "1:147725314310:web:fe8f5a82f5a9c04c685687",
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-      const db = firebase.firestore();
-    </script>
-    <script type="module" src="src/app.js"></script>
-  </body>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDzvO7xqa9bwmCF5fRwX3fcRMME7pjyOmk",
+      authDomain: "codecheatsheet-7d13a.firebaseapp.com",
+      databaseURL: "https://codecheatsheet-7d13a.firebaseio.com",
+      projectId: "codecheatsheet-7d13a",
+      storageBucket: "codecheatsheet-7d13a.appspot.com",
+      messagingSenderId: "147725314310",
+      appId: "1:147725314310:web:fe8f5a82f5a9c04c685687",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+
 </html>
