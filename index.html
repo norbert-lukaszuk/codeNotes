@@ -7,9 +7,7 @@
     " />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
     integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/prism.min.js"
-    integrity="sha512-rYNMWcr8EuYc/6mSBu0wD+hSoA4KkHvYRlmJEJGQI4bsho0OiX8fPOVB822QQZizkTUdkUCnJLnN8SAUBg9y9w=="
-    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="prism.css">
   <link rel="stylesheet" href="style.css" />
   <title>Code Notes</title>
 </head>
@@ -81,7 +79,6 @@
           <textarea id="snippet__input" cols="55" rows="8" data-color="var(--cssColor)"></textarea>
         </div>
         <div class="tags__wraper" id="tags__wraper">
-          <!-- <label for="tags__input">#</label> -->
           <i class="fas fa-hashtag"></i>
           <input type="text" id="tags__input" placeholder="#hashtags" />
         </div>
@@ -92,11 +89,17 @@
       </form>
     </div>
   </div>
-  <div class="output" id="output"></div>
+  <div class="output" id="output">
+    <pre><code class="language-css">
+      .element{
+        color:  blue;
+      }
+    </code></pre>
+  </div>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
-
+  <script src="prism.js"></script>
   <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {

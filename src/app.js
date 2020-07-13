@@ -15,7 +15,6 @@ const add__form = document.querySelector("#add__form");
 const cancel__button = document.querySelector("#cancel__button");
 const login__cancel = document.querySelector("#login__cancel");
 let Actual = "JavaScript";
-
 class Snippet {
   constructor(lang, code, tags, color) {
     this.lang = lang;
@@ -39,14 +38,15 @@ const loadContent = (data) => {
   container.style.backgroundColor = `${data.color}`;
   container.className = "snippet__container";
   data.lang === "HTML"
-    ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
+    ? (container.innerHTML = `<pre><code class="language-html">${htmlConversion(
       data.code
-    )}</p> <p class="language__tag"></p>`)
-    : (container.innerHTML = `<p class="snippet__text">${data.code}</p> <p class="language__tag"></p>`);
+    )}</code></pre> <p class="language__tag"></p>`)
+    : (container.innerHTML = ` <pre class="code__block"><code class="language-css">${data.code}</code></pre><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
   });
   output.appendChild(container);
+  Prism.highlightAll();
 };
 // set onSnapshot 
 const setOnSnapshot = () => {
@@ -56,6 +56,7 @@ const setOnSnapshot = () => {
       const data = change.doc.data();
       loadContent(data);
       changeHeader(data);
+      Prism.highlightAll();
     });
   });
 
@@ -198,6 +199,7 @@ nav__list.addEventListener("click", (e) => {
         loadContent(data);
         changeHeader(data);
         hideAll();
+
       });
     });
   } //get style of clicked element and change heder text & color

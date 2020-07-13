@@ -60,23 +60,7 @@ body {
   background-color: #f0f3bd;
   box-shadow: 3px 3px 7px #000000;
 }
-.container__menu {
-  display: none;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.4);
-}
-.container__menu i {
-  color: rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-  margin-right: 15px;
-}
-.container__menu i:nth-child(2) {
-  margin-bottom: 5px;
-}
+
 
 .fog__background {
   position: absolute;
@@ -196,9 +180,7 @@ body {
 .language__list li:nth-of-type(3) {
   background-color: var(--jsColor);
 }
-.language__tag {
-  padding-top: 10px;
-}
+
 .login__wraper {
   display: none;
   position: absolute;
@@ -322,15 +304,19 @@ body {
 .snippet__container--expand {
   height: max-content;
 }
-/* .snippet__container:hover > div[class="container__menu"] {
-  display: flex;
-} */
+.snippet__container pre{
+  width: 95%;
+  height: 100%;
+  padding: 10px;
+  margin: 0;
+  overflow: scroll;
+}
 .snippet__text {
   min-height: 150px;
   height: 150px;
   width: 310px;
   background-color: #ffffff;
-  padding: 10px;
+  margin: 0;
   overflow: scroll;
 }
 .snippet__text--expand {
