@@ -53,7 +53,7 @@ const loadContent = (data) => {
     )}</code></pre> <p class="language__tag"></p>`)
     : (container.innerHTML = ` <pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
-    container.lastElementChild.textContent += " " + e;
+    container.lastElementChild.innerHTML += `<span class="tag">#${e} </span>`;
   });
   output.appendChild(container);
   Prism.highlightAll();
@@ -260,7 +260,7 @@ input__form.addEventListener("submit", (e) => {
   let newSnippet = new Snippet();
   let arr = input__form.tags__input.value.split(" ");
   let tagged = [];
-  tagged = arr.map((e) => "#" + e);
+  tagged = arr.map((e) => e);
   newSnippet.tags = tagged;
   newSnippet.code = input__form.snippet__input.value;
   const category = document.getElementsByName("category");
@@ -300,5 +300,20 @@ output.addEventListener("click", (e) => {
     e.target.parentElement.children[0].classList.toggle("code__block--expand");
     e.target.parentElement.parentElement.classList.toggle("snippet__container--expand");
   }
+  else if (e.target.className === "tag") {
+    let tag = e.target.innerText.slice(1)
 
+    query(tag);
+
+  }
 });
+function query(tag) {
+  // firebase queries
+  db.collection(`data/codeNotes/JavaScript`).where("tags", "array-contains", tag).get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(e => {
+        console.log(e);
+      })
+    })
+    .catch(err => console.log(err));
+}
