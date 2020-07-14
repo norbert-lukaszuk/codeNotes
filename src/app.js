@@ -14,6 +14,7 @@ const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
 const cancel__button = document.querySelector("#cancel__button");
 const login__cancel = document.querySelector("#login__cancel");
+const user__button = document.querySelector("#user__button");
 let Actual = "JavaScript";
 class Snippet {
   constructor(lang, code, tags, color) {
@@ -125,8 +126,24 @@ const loadFiltered = (lang) => {
     }
   });
 };
+auth.onAuthStateChanged(user => {
+  if (user) {
+    setOnSnapshot();
+    user__button.firstElementChild.className = "fas fa-sign-out-alt fa-2x";
+    user__button.addEventListener("click", e => {
+      hideAll();
+      auth.signOut();
+    })
+  }
+  else {
+    user__button.firstElementChild.className = "fas fa-user fa-2x";
+    selected.textContent = 'Sign in to use';
+    selected.parentElement.style.backgroundColor = 'var(--headerColor)';
+    output.innerHTML = '';
+    login__wraper.classList.add("login__wraper--show")
+  }
+})
 // load content first time
-setOnSnapshot();
 
 // login procedure
 
