@@ -263,14 +263,11 @@ cancel__button.addEventListener("click", (e) => {
 
 // click on container to expand container for all snippet text
 output.addEventListener("click", (e) => {
-  console.log(e.target)
-  // expand after click on click on container
-  if (e.target.classList.contains("snippet__container")) {
-    e.target.classList.toggle("snippet__container--expand");
-    e.target.children[1].classList.toggle("snippet__text--expand");
-    // expand after click on text
-  } else if (e.target.classList.contains("code__block")) {
-    // e.target.classList.toggle("code__block--expand");
-    // e.target.parentElement.classList.toggle("snippet__container--expand");
+  console.log(e.target.parentElement.parentElement)
+  // expand after click on text
+  if (e.target.parentElement.children[0].classList.contains("code__block")) {
+    e.target.parentElement.children[0].classList.toggle("code__block--expand");
+    e.target.parentElement.parentElement.classList.toggle("snippet__container--expand");
   }
+
 });

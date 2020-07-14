@@ -60,7 +60,13 @@ body {
   background-color: #f0f3bd;
   box-shadow: 3px 3px 7px #000000;
 }
-
+.code__block{
+  width: 310px;
+  height: 150px;
+  padding: 10px;
+  margin: 0;
+  overflow: scroll;
+}
 .code__block--expand{
   height: max-content;
 }
@@ -306,13 +312,7 @@ body {
 .snippet__container--expand {
   height: max-content;
 }
-.snippet__container pre{
-  width: 310px;
-  height: 150px;
-  padding: 10px;
-  margin: 0;
-  overflow: scroll;
-}
+
 .snippet__text {
   min-height: 150px;
   height: 150px;
