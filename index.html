@@ -66,15 +66,17 @@
     <div class="form__wraper" id="form__wraper">
       <form id="input__form">
         <div class="radio__wraper" id="radio__wraper">
-          <input type="radio" name="category" id="css" value="CSS" data-color="var(--cssColor)" />
+          <input type="radio" name="category" id="css" value="CSS" data-color="var(--cssColor)"
+            data-prism="language-css" />
           <label for="css">CSS</label>
-          <input type="radio" name="category" id="javaScript" value="JavaScript" data-color="var(--jsColor)" />
+          <input type="radio" name="category" id="javaScript" value="JavaScript" data-color="var(--jsColor)"
+            data-prism="language-js" />
           <label for="javaScript">JS</label>
-          <input type="radio" name="category" id="html" value="HTML" data-color="var(--htmlColor)" />
+          <input type="radio" name="category" id="html" value="HTML" data-color="var(--htmlColor)"
+            data-prism="language-html" />
           <label for="html">HTML</label>
         </div>
         <div class="textarea__wraper" id="textarea__wraper">
-          <!-- <label for="snippet__input">Your code</label> -->
           <i class="fas fa-code"></i>
           <textarea id="snippet__input" cols="55" rows="8" data-color="var(--cssColor)"></textarea>
         </div>
@@ -90,11 +92,7 @@
     </div>
   </div>
   <div class="output" id="output">
-    <pre><code class="language-css">
-      .element{
-        color:  blue;
-      }
-    </code></pre>
+
   </div>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>

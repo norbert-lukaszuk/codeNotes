@@ -38,10 +38,10 @@ const loadContent = (data) => {
   container.style.backgroundColor = `${data.color}`;
   container.className = "snippet__container";
   data.lang === "HTML"
-    ? (container.innerHTML = `<pre><code class="language-html">${htmlConversion(
+    ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
       data.code
     )}</code></pre> <p class="language__tag"></p>`)
-    : (container.innerHTML = ` <pre class="code__block"><code class="language-css">${data.code}</code></pre><p class="language__tag"></p>`);
+    : (container.innerHTML = ` <pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.lastElementChild.textContent += " " + e;
   });
@@ -237,6 +237,7 @@ input__form.addEventListener("submit", (e) => {
     if (e.checked) {
       newSnippet.color = e.dataset.color;
       newSnippet.lang = e.value;
+      newSnippet.prism = e.dataset.prism;
     }
   });
   console.log(newSnippet);
@@ -247,6 +248,7 @@ input__form.addEventListener("submit", (e) => {
       code: newSnippet.code,
       tags: newSnippet.tags,
       color: newSnippet.color,
+      prism: newSnippet.prism,
     })
     .catch((err) => console.error(err));
   // close add__form after sending data to firestore
@@ -261,13 +263,14 @@ cancel__button.addEventListener("click", (e) => {
 
 // click on container to expand container for all snippet text
 output.addEventListener("click", (e) => {
+  console.log(e.target)
   // expand after click on click on container
   if (e.target.classList.contains("snippet__container")) {
     e.target.classList.toggle("snippet__container--expand");
     e.target.children[1].classList.toggle("snippet__text--expand");
     // expand after click on text
-  } else if (e.target.classList.contains("snippet__text")) {
-    e.target.classList.toggle("snippet__text--expand");
-    e.target.parentElement.classList.toggle("snippet__container--expand");
+  } else if (e.target.classList.contains("code__block")) {
+    // e.target.classList.toggle("code__block--expand");
+    // e.target.parentElement.classList.toggle("snippet__container--expand");
   }
 });
