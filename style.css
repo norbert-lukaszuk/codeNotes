@@ -324,6 +324,24 @@ body {
 .snippet__text--expand {
   height: max-content;
 }
+.status{
+  color: #fff;
+  text-align: center;
+}
+.status__wraper{
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 160px;
+  z-index: 1;
+  transform: translateY(-220px);
+  transition: all .5s ease-in-out;
+}
+.status__wraper--show{
+  transform: translateY(0);
+
+}
 .tags__wraper {
   display: flex;
   justify-content: start;

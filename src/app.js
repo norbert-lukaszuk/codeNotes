@@ -15,6 +15,8 @@ const add__form = document.querySelector("#add__form");
 const cancel__button = document.querySelector("#cancel__button");
 const login__cancel = document.querySelector("#login__cancel");
 const user__button = document.querySelector("#user__button");
+const status = document.querySelector("#status");
+const status__wraper = document.querySelector("#status__wraper")
 let Actual = "JavaScript";
 class Snippet {
   constructor(lang, code, tags, color) {
@@ -23,7 +25,7 @@ class Snippet {
     (this.tags = tags), (this.color = color);
   }
 }
-
+console.log(status__wraper);
 // hide all navi elements
 const hideAll = () => {
   language__list.classList.remove("show");
@@ -33,6 +35,13 @@ const hideAll = () => {
   hamburger.classList.remove("hamburger--hide");
   nav__list.classList.remove("nav__list--show");
 };
+// show status notification for period of time
+
+const showStatus = (massage, time) => {
+  status__wraper.classList.add("status__wraper--show");
+  status__wraper.firstElementChild.textContent = massage;
+  setTimeout(() => { status__wraper.classList.remove("status__wraper--show") }, time)
+}
 // load the the one container in output
 const loadContent = (data) => {
   const container = document.createElement("div");
@@ -126,24 +135,29 @@ const loadFiltered = (lang) => {
     }
   });
 };
+// check if user is signed in 
 auth.onAuthStateChanged(user => {
+  //if signin
   if (user) {
-    setOnSnapshot();
+    setOnSnapshot(); // load content after signin passed
     user__button.firstElementChild.className = "fas fa-sign-out-alt fa-2x";
+    showStatus("You'r signin!", 3000);
     user__button.addEventListener("click", e => {
       hideAll();
       auth.signOut();
     })
   }
+  //if signout
   else {
     user__button.firstElementChild.className = "fas fa-user fa-2x";
     selected.textContent = 'Sign in to use';
     selected.parentElement.style.backgroundColor = 'var(--headerColor)';
     output.innerHTML = '';
-    login__wraper.classList.add("login__wraper--show")
+    login__wraper.classList.add("login__wraper--show");
+    showStatus("You'r signout !", 3000)
   }
 })
-// load content first time
+
 
 // login procedure
 
