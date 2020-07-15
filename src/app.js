@@ -231,6 +231,7 @@ input__form.addEventListener("submit", (e) => {
   tagged = arr.map((e) => e);
   newSnippet.tags = tagged;
   newSnippet.code = input__form.snippet__input.value;
+  // set time stamp on snippet (??db.Timestamp dosn't work)
   newSnippet.time = firebase.firestore.Timestamp.fromDate(new Date());
   // get info from radio button
   const category = document.getElementsByName("category");

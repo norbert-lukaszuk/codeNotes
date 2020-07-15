@@ -145,31 +145,33 @@ body {
   cursor: pointer;
 }
 .input__wraper {
-  width: 60%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   margin: 12px 0;
   padding: 25px 0 15px 0;
-  background-color: #8338ec;
   border-radius: 10px;
 }
 .input__wraper input {
   color: #ffffff;
   background: none;
   border: none;
-  width: 80%;
+  /* width: 80%; */
+  border-bottom: 2px solid #ffffff;
 }
 .input__wraper label {
   position: absolute;
   color: #ffffff;
-  transition: all 0.5s ease-out;
+  top: 10px;
+  transition: all 0.8s ease-out;
 }
 .input__wraper input:focus + label {
-  transform: translateY(-25px);
+  transform: translate(-75%, -10px) scale(0.75);
 }
 .input__wraper input:valid + label {
-  transform: translateY(-25px);
+  transform: translate(-75%,-10px) scale(0.75);
 }
 
 .input__wraper input:focus {
@@ -205,21 +207,30 @@ body {
 }
 .login__wraper {
   display: none;
+  justify-content: center;
+  align-items: flex-start;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 60px;
   z-index: 3;
-  background-color: var(--grayBackground);
+  /* background-color: var(--grayBackground); */
+  background-size: cover;
+  background: url('assets/img/daniel-salcius-2bCecstknFc-unsplash.jpg');
 }
 .login__wraper--show {
-  display: block;
+  display: flex;
 }
 .login__wraper form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 50px;
+  border-radius: 15px;
+  padding: 30px;
+  width: 80%;
+  backdrop-filter: blur(7px);
 }
 .nav__wraper {
   position: absolute;
