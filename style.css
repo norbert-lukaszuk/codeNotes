@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
 * {
   margin: 0;
@@ -107,21 +106,6 @@ body {
   background-color: #3a86ff;
 }
 
-/* .form__wraper {
-  /* background-color: #ffffff; */
-  /* width: 100%; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 5px;
-} */
-.form__wraper form{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 .header__wraper {
   display: flex;
   position: fixed;
@@ -215,8 +199,8 @@ body {
   top: 60px;
   z-index: 3;
   /* background-color: var(--grayBackground); */
-  background-size: cover;
-  background: url('assets/img/daniel-salcius-2bCecstknFc-unsplash.jpg');
+  background-size: auto;
+  background: url('assets/img/mudit-raina-uh4WUvBfff4-unsplash.jpg');
 }
 .login__wraper--show {
   display: flex;
