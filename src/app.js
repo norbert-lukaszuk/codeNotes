@@ -19,10 +19,12 @@ const status = document.querySelector("#status");
 const status__wraper = document.querySelector("#status__wraper")
 let Actual = "JavaScript";
 class Snippet {
-  constructor(lang, code, tags, color) {
+  constructor(lang, code, tags, color, time) {
     this.lang = lang;
     this.code = code;
-    (this.tags = tags), (this.color = color);
+    this.tags = tags;
+    this.color = color;
+    this.time = time;
   }
 }
 console.log(status__wraper);
@@ -229,6 +231,8 @@ input__form.addEventListener("submit", (e) => {
   tagged = arr.map((e) => e);
   newSnippet.tags = tagged;
   newSnippet.code = input__form.snippet__input.value;
+  newSnippet.time = firebase.firestore.Timestamp.fromDate(new Date());
+  // get info from radio button
   const category = document.getElementsByName("category");
   category.forEach((e) => {
     if (e.checked) {
@@ -246,6 +250,7 @@ input__form.addEventListener("submit", (e) => {
       tags: newSnippet.tags,
       color: newSnippet.color,
       prism: newSnippet.prism,
+      time: newSnippet.time,
     })
     .catch((err) => console.error(err));
   // close add__form after sending data to firestore
