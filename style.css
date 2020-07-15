@@ -191,6 +191,8 @@ body {
 .language__tag span{
   margin-right: 5px;
   cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 .login__wraper {
   display: none;
