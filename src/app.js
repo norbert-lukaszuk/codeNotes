@@ -53,7 +53,7 @@ const loadContent = (data) => {
     )}</code></pre> <p class="language__tag"></p>`)
     : (container.innerHTML = ` <pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
-    container.lastElementChild.innerHTML += `<span class="tag">#${e} </span>`;
+    container.lastElementChild.innerHTML += `<span class="tag">#${e}</span>`;
   });
   output.appendChild(container);
   Prism.highlightAll();
@@ -71,17 +71,6 @@ const setOnSnapshot = () => {
   });
 
 }
-// get data from firestore once
-const getDataOnce = () => {
-  db.collection(`data/codeNotes/${Actual}`)
-    .get()
-    .then((doc) => {
-      doc.forEach((e) => {
-        loadContent(e.data());
-        changeHeader(e.data());
-      });
-    });
-};
 // unsubscribe from firestore liveupdate to load data correctly after changing language to show
 const unsubscribe = db
   .collection(`data/codeNotes/${Actual}`)
@@ -113,28 +102,6 @@ const htmlConversion = (code) => {
   return string;
 };
 
-// filter by language
-const loadFiltered = (lang) => {
-  output.innerHTML = "";
-  data.forEach((e) => {
-    const tags = [...e.tags];
-    if (e.lang === lang) {
-      const container = document.createElement("div");
-      container.style.backgroundColor = `${e.color}`;
-      container.className = "snippet__container";
-      lang === "HTML"
-        ? (container.innerHTML = `<div class="container__menu"></div><p class="snippet__text">${htmlConversion(
-          e.code
-        )}</p> <p class="language__tag"></p>`)
-        : (container.innerHTML = `<p class="snippet__text">${e.code}</p> <p class="language__tag"></p>`);
-      tags.forEach((e) => {
-        container.lastElementChild.textContent += " #" + e;
-      });
-      output.appendChild(container);
-      changeHeader(e);
-    }
-  });
-};
 // check if user is signed in 
 auth.onAuthStateChanged(user => {
   //if signin
@@ -160,7 +127,6 @@ auth.onAuthStateChanged(user => {
 
 
 // login procedure
-
 login__form.addEventListener("submit", (e) => {
   e.preventDefault();
   const user = login__form.user__email.value;
@@ -309,10 +275,12 @@ output.addEventListener("click", (e) => {
 });
 function query(tag) {
   // firebase queries
-  db.collection(`data/codeNotes/JavaScript`).where("tags", "array-contains", tag).get()
+  db.collection(`data/codeNotes/${Actual}`).where("tags", "array-contains", tag).get()
+    // .then(console.log(tag))
     .then(querySnapshot => {
+      output.innerHTML = '';
       querySnapshot.forEach(e => {
-        console.log(e);
+        loadContent(e.data());
       })
     })
     .catch(err => console.log(err));

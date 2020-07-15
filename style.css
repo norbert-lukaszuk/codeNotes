@@ -188,7 +188,10 @@ body {
 .language__list li:nth-of-type(3) {
   background-color: var(--jsColor);
 }
-
+.language__tag span{
+  margin-right: 5px;
+  cursor: pointer;
+}
 .login__wraper {
   display: none;
   position: absolute;
