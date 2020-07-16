@@ -47,10 +47,11 @@ const showStatus = (massage, time) => {
   setTimeout(() => { status__wraper.classList.remove("status__wraper--show") }, time)
 }
 // load the the one container in output
-const loadContent = (data) => {
+const loadContent = (data, id) => {
   const container = document.createElement("div");
   container.style.backgroundColor = `${data.color}`;
   container.className = "snippet__container";
+  container.setAttribute("data-id", id);
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
       data.code
@@ -69,7 +70,8 @@ const setOnSnapshot = () => {
     let changes = snapshot.docChanges();
     changes.forEach((change) => {
       const data = change.doc.data();
-      loadContent(data);
+      const id = change.doc.id;
+      loadContent(data, id);
       changeHeader(data);
       Prism.highlightAll();
       count.textContent = countSnippets();
@@ -197,9 +199,11 @@ nav__list.addEventListener("click", (e) => {
     unsubscribe();
     db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
       let changes = snapshot.docChanges();
+      console.log(changes);
       changes.forEach((change) => {
         const data = change.doc.data();
-        loadContent(data);
+        const id = change.doc.id;
+        loadContent(data, id);
         changeHeader(data);
         hideAll();
 
@@ -290,7 +294,7 @@ function query(tag) {
     .then(querySnapshot => {
       output.innerHTML = '';
       querySnapshot.forEach(e => {
-        loadContent(e.data());
+        loadContent(e.data(), e.id);
       })
     })
     // .then(count.textContent = countSnippets())
