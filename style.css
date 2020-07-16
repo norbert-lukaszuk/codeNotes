@@ -82,10 +82,16 @@ body {
   border-bottom-right-radius: 20px;
   transition: all .6s ease-in-out;
 }
-.container__slider:hover{
+.container__slider > i{
+  position: absolute;
+  transition: all .6s ease-in-out;
+  top: 25%;
+}
+.container__slider:hover {
   width: 140px;
-  
-  
+}
+.container__slider:hover >i{
+  transform: translateX(100px);
 }
 .count{
   position: absolute;

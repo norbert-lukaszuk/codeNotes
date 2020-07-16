@@ -56,7 +56,7 @@ const loadContent = (data, id) => {
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
       data.code
     )}</code></pre><div class="container__slider"></div><p class="language__tag"></p>`)
-    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"></div><p class="language__tag"></p>`);
+    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="far fa-trash-alt"></i></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
   });
