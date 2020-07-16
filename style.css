@@ -99,6 +99,9 @@ body {
   border-radius: 10px;
   margin: 0 15px;
 }
+.form__buttons button:hover{
+  transform: scale(1.05);
+}
 .form__buttons > button:nth-child(1) {
   background-color: #ff006e;
 }
@@ -211,10 +214,10 @@ body {
   align-items: center;
   flex-direction: column;
   margin-top: 50px;
-  border-radius: 15px;
+  border-radius: 25px;
   padding: 30px;
   width: 80%;
-  backdrop-filter: blur(7px);
+  backdrop-filter: blur(4px);
 }
 .nav__wraper {
   position: absolute;
