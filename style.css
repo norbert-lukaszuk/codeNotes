@@ -71,6 +71,22 @@ body {
 .code__block--expand{
   height: max-content;
 }
+.container__slider{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: coral;
+  left: 0;
+  bottom: 18px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition: all .6s ease-in-out;
+}
+.container__slider:hover{
+  width: 140px;
+  
+  
+}
 .count{
   position: absolute;
   text-align: center;
@@ -201,6 +217,7 @@ body {
   margin-top: 10px;
   overflow: scroll;
   padding: 0 15px;
+  margin-left: 15px;
   width: 80%;
 }
 .language__tag span{

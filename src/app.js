@@ -55,10 +55,10 @@ const loadContent = (data, id) => {
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
       data.code
-    )}</code></pre> <p class="language__tag"><i class="far fa-trash-alt"></i></p>`)
-    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><p class="language__tag"><i class="far fa-trash-alt"></i></p>`);
+    )}</code></pre><div class="container__slider"></div><p class="language__tag"></p>`)
+    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
-    container.children[1].innerHTML += `<span class="tag">#${e}</span>`;
+    container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
   });
   output.appendChild(container);
   Prism.highlightAll();
