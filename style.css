@@ -197,11 +197,27 @@ body {
 .language__list li:nth-of-type(3) {
   background-color: var(--jsColor);
 }
+.language__tag{
+  margin-top: 10px;
+  overflow: scroll;
+  padding: 0 15px;
+  width: 80%;
+}
 .language__tag span{
   margin-right: 5px;
   cursor: pointer;
+  font-size: 1.25rem;
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+.language__tag i{
+  position: absolute;
+  left: 10px;
+  transition: all .2s ease-in-out;
+}
+.language__tag i:hover{
+  transform: scale(1.15);
+  color: crimson;
 }
 .login__wraper {
   display: none;
@@ -321,14 +337,14 @@ body {
 .snippet__container {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 330px;
-  height: 200px;
+  height: 220px;
   background-color: var(--jsColor);
   margin: 25px auto;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }

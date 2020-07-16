@@ -55,10 +55,10 @@ const loadContent = (data, id) => {
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
       data.code
-    )}</code></pre> <p class="language__tag"></p>`)
-    : (container.innerHTML = ` <pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><p class="language__tag"></p>`);
+    )}</code></pre> <p class="language__tag"><i class="far fa-trash-alt"></i></p>`)
+    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><p class="language__tag"><i class="far fa-trash-alt"></i></p>`);
   data.tags.forEach((e) => {
-    container.lastElementChild.innerHTML += `<span class="tag">#${e}</span>`;
+    container.children[1].innerHTML += `<span class="tag">#${e}</span>`;
   });
   output.appendChild(container);
   Prism.highlightAll();
@@ -109,7 +109,20 @@ const htmlConversion = (code) => {
   });
   return string;
 };
-
+// load snippets only with tag, that was clicked
+const query = (tag) => {
+  // firebase queries
+  db.collection(`data/codeNotes/${Actual}`).where("tags", "array-contains", tag).get()
+    // .then(console.log(tag))
+    .then(querySnapshot => {
+      output.innerHTML = '';
+      querySnapshot.forEach(e => {
+        loadContent(e.data(), e.id);
+      })
+    })
+    // .then(count.textContent = countSnippets())
+    .catch(err => console.log(err));
+}
 // check if user is signed in 
 auth.onAuthStateChanged(user => {
   //if signin
@@ -280,6 +293,7 @@ output.addEventListener("click", (e) => {
     e.target.parentElement.children[0].classList.toggle("code__block--expand");
     e.target.parentElement.parentElement.classList.toggle("snippet__container--expand");
   }
+  // load only snippets with that tag
   else if (e.target.className === "tag") {
     let tag = e.target.innerText.slice(1)
 
@@ -287,16 +301,3 @@ output.addEventListener("click", (e) => {
 
   }
 });
-function query(tag) {
-  // firebase queries
-  db.collection(`data/codeNotes/${Actual}`).where("tags", "array-contains", tag).get()
-    // .then(console.log(tag))
-    .then(querySnapshot => {
-      output.innerHTML = '';
-      querySnapshot.forEach(e => {
-        loadContent(e.data(), e.id);
-      })
-    })
-    // .then(count.textContent = countSnippets())
-    .catch(err => console.log(err));
-}
