@@ -16,7 +16,8 @@ const cancel__button = document.querySelector("#cancel__button");
 const login__cancel = document.querySelector("#login__cancel");
 const user__button = document.querySelector("#user__button");
 const status = document.querySelector("#status");
-const status__wraper = document.querySelector("#status__wraper")
+const status__wraper = document.querySelector("#status__wraper");
+const count = document.querySelector("#count");
 let Actual = "JavaScript";
 class Snippet {
   constructor(lang, code, tags, color, time) {
@@ -37,8 +38,9 @@ const hideAll = () => {
   hamburger.classList.remove("hamburger--hide");
   nav__list.classList.remove("nav__list--show");
 };
+// count containers in output
+const countSnippets = () => output.querySelectorAll(".snippet__container").length
 // show status notification for period of time
-
 const showStatus = (massage, time) => {
   status__wraper.classList.add("status__wraper--show");
   status__wraper.firstElementChild.textContent = massage;
@@ -59,6 +61,7 @@ const loadContent = (data) => {
   });
   output.appendChild(container);
   Prism.highlightAll();
+  count.textContent = countSnippets();
 };
 // set onSnapshot 
 const setOnSnapshot = () => {
@@ -69,6 +72,7 @@ const setOnSnapshot = () => {
       loadContent(data);
       changeHeader(data);
       Prism.highlightAll();
+      count.textContent = countSnippets();
     });
   });
 
@@ -87,7 +91,7 @@ const changeHeader = (element) => {
   hideAll();
 };
 
-// html tag conversion
+// html tag conversion to show code without browser interpeting it
 const htmlConversion = (code) => {
   const splited = code.split("");
   const indexes = splited.map((e) => {
@@ -289,5 +293,6 @@ function query(tag) {
         loadContent(e.data());
       })
     })
+    // .then(count.textContent = countSnippets())
     .catch(err => console.log(err));
 }

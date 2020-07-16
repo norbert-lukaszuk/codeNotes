@@ -71,6 +71,16 @@ body {
 .code__block--expand{
   height: max-content;
 }
+.count{
+  position: absolute;
+  text-align: center;
+  right: 50px;
+  height: 25px;
+  width: 25px;
+  padding-top: 3px;
+  border-radius: 50%;
+  background-color: darkcyan;
+}
 .fog__background {
   position: absolute;
   top: 60px;
