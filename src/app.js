@@ -47,9 +47,11 @@ const showStatus = (massage, time) => {
   setTimeout(() => { status__wraper.classList.remove("status__wraper--show") }, time)
 }
 // get data from firestore to edit
-const getDataToEdit = (id) => {
-  db.collection(`data/codeNotes/${Actual}`).doc(id).get()
-    .then(resp => console.log(resp.data().code))
+const getDataToEdit = async (id) => {
+  const resp = await db.collection(`data/codeNotes/${Actual}`).doc(id).get()
+  const code = resp.docs;
+  return code
+  // .then(resp => resp.data().code);
 }
 // load the the one container in output
 const loadContent = (data, id) => {
@@ -310,10 +312,12 @@ output.addEventListener("click", (e) => {
     e.target.nextElementSibling.classList.toggle("containerSlider__menu--show")// show slider menu
   }
   else if (e.target.textContent === "Edit") { //edit the snippet
-    const code = e.target.parentElement.parentElement.parentElement.children[0].firstElementChild.firstElementChild.textContent;// get the snippet text after click on slider menu Edit
+    // const code = e.target.parentElement.parentElement.parentElement.children[0].firstElementChild.firstElementChild.textContent;// get the snippet text after click on slider menu Edit
     const id = e.target.parentElement.parentElement.parentElement.dataset.id; // get the snippet text after click on 
     console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
-    getDataToEdit(id);
+    // add__form.classList.toggle("add__form--show");
     // input__form.snippet__input.textContent = code;
+    console.log(getDataToEdit(id))
+
   }
 });
