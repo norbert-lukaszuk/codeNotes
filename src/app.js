@@ -55,8 +55,8 @@ const loadContent = (data, id) => {
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
       data.code
-    )}</code></pre><div class="container__slider"></div><p class="language__tag"></p>`)
-    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="far fa-trash-alt"></i></div><p class="language__tag"></p>`);
+    )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
+    : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
   });
@@ -296,8 +296,12 @@ output.addEventListener("click", (e) => {
   // load only snippets with that tag
   else if (e.target.className === "tag") {
     let tag = e.target.innerText.slice(1)
-
     query(tag);
-
+  }
+  else if (e.target.classList.contains("fa-ellipsis-v")) {
+    console.log(e.target.nextElementSibling);
+    e.target.parentElement.classList.toggle("container__slider--show");//expand slider
+    e.target.classList.toggle("containerSlider__dots--move");// move slider dots to up corner
+    e.target.nextElementSibling.classList.toggle("containerSlider__menu--show")// show slider menu
   }
 });

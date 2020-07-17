@@ -73,6 +73,7 @@ body {
 }
 .container__slider{
   position: absolute;
+  padding-top: 30px;
   width: 40px;
   height: 40px;
   background-color: coral;
@@ -82,16 +83,37 @@ body {
   border-bottom-right-radius: 20px;
   transition: all .6s ease-in-out;
 }
+/* dots in slider menu */
 .container__slider > i{
   position: absolute;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 5px;
   transition: all .6s ease-in-out;
-  top: 25%;
+  top: 12.5%;
+  left: 5px;
 }
-.container__slider:hover {
+.container__slider--show {
   width: 140px;
+  height: 130px;
+  border-radius: 0;
+  background-color: darkgray;
 }
-.container__slider:hover >i{
-  transform: translateX(100px);
+.containerSlider__dots--move{
+  transform: translate(100px, -15px);
+}
+.containerSlider__menu{
+  opacity: 0;
+  pointer-events: none;
+}
+.containerSlider__menu--show{
+  opacity: 1;
+  pointer-events: all;
+  transition: all .8s ease-in-out;
+}
+.containerSlider__menu p{
+  padding: 5px 20px;
 }
 .count{
   position: absolute;
