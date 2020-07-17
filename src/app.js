@@ -39,20 +39,30 @@ const hideAll = () => {
   nav__list.classList.remove("nav__list--show");
 };
 // count containers in output
-const countSnippets = () => output.querySelectorAll(".snippet__container").length
+const countSnippets = () =>
+  output.querySelectorAll(".snippet__container").length;
 // show status notification for period of time
 const showStatus = (massage, time) => {
   status__wraper.classList.add("status__wraper--show");
   status__wraper.firstElementChild.textContent = massage;
-  setTimeout(() => { status__wraper.classList.remove("status__wraper--show") }, time)
-}
+  setTimeout(() => {
+    status__wraper.classList.remove("status__wraper--show");
+  }, time);
+};
 // get data from firestore to edit
-const getDataToEdit = async (id) => {
-  const resp = await db.collection(`data/codeNotes/${Actual}`).doc(id).get()
-  const code = resp.docs;
-  return code
-  // .then(resp => resp.data().code);
-}
+const getDataToEdit = (id) => {
+  let data = 1;
+  db.collection(`data/codeNotes/${Actual}`)
+    .doc(id)
+    .get()
+    .then((resp) => {
+      input__form.snippet__input.textContent = resp.data().code;
+      resp
+        .data()
+        .tags.forEach((e) => (input__form.tags__input.value += " #" + e));
+      add__form.classList.toggle("add__form--show");
+    });
+};
 // load the the one container in output
 const loadContent = (data, id) => {
   const container = document.createElement("div");
@@ -61,8 +71,8 @@ const loadContent = (data, id) => {
   container.setAttribute("data-id", id);
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
-      data.code
-    )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
+        data.code
+      )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
     : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
@@ -71,7 +81,7 @@ const loadContent = (data, id) => {
   Prism.highlightAll();
   count.textContent = countSnippets();
 };
-// set onSnapshot 
+// set onSnapshot
 const setOnSnapshot = () => {
   db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
     let changes = snapshot.docChanges();
@@ -84,8 +94,7 @@ const setOnSnapshot = () => {
       count.textContent = countSnippets();
     });
   });
-
-}
+};
 // unsubscribe from firestore liveupdate to load data correctly after changing language to show
 const unsubscribe = db
   .collection(`data/codeNotes/${Actual}`)
@@ -119,40 +128,41 @@ const htmlConversion = (code) => {
 // load snippets only with tag, that was clicked
 const query = (tag) => {
   // firebase queries
-  db.collection(`data/codeNotes/${Actual}`).where("tags", "array-contains", tag).get()
+  db.collection(`data/codeNotes/${Actual}`)
+    .where("tags", "array-contains", tag)
+    .get()
     // .then(console.log(tag))
-    .then(querySnapshot => {
-      output.innerHTML = '';
-      querySnapshot.forEach(e => {
+    .then((querySnapshot) => {
+      output.innerHTML = "";
+      querySnapshot.forEach((e) => {
         loadContent(e.data(), e.id);
-      })
+      });
     })
     // .then(count.textContent = countSnippets())
-    .catch(err => console.log(err));
-}
-// check if user is signed in 
-auth.onAuthStateChanged(user => {
+    .catch((err) => console.log(err));
+};
+// check if user is signed in
+auth.onAuthStateChanged((user) => {
   //if signin
   if (user) {
     setOnSnapshot(); // load content after signin passed
     user__button.firstElementChild.className = "fas fa-sign-out-alt fa-2x";
     showStatus("You'r signin!", 3000);
-    user__button.addEventListener("click", e => {
+    user__button.addEventListener("click", (e) => {
       hideAll();
       auth.signOut();
-    })
+    });
   }
   //if signout
   else {
     user__button.firstElementChild.className = "fas fa-user fa-2x";
-    selected.textContent = 'Sign in to use';
-    selected.parentElement.style.backgroundColor = 'var(--headerColor)';
-    output.innerHTML = '';
+    selected.textContent = "Sign in to use";
+    selected.parentElement.style.backgroundColor = "var(--headerColor)";
+    output.innerHTML = "";
     login__wraper.classList.add("login__wraper--show");
-    showStatus("You'r signout !", 3000)
+    showStatus("You'r signout !", 3000);
   }
-})
-
+});
 
 // login procedure
 login__form.addEventListener("submit", (e) => {
@@ -226,7 +236,6 @@ nav__list.addEventListener("click", (e) => {
         loadContent(data, id);
         changeHeader(data);
         hideAll();
-
       });
     });
   } //get style of clicked element and change heder text & color
@@ -294,30 +303,30 @@ cancel__button.addEventListener("click", (e) => {
 
 // click on container to expand container for all snippet text
 output.addEventListener("click", (e) => {
-  console.log(e.target.parentElement.parentElement)
+  console.log(e.target.parentElement.parentElement);
   // expand after click on text
   if (e.target.parentElement.children[0].classList.contains("code__block")) {
     e.target.parentElement.children[0].classList.toggle("code__block--expand");
-    e.target.parentElement.parentElement.classList.toggle("snippet__container--expand");
+    e.target.parentElement.parentElement.classList.toggle(
+      "snippet__container--expand"
+    );
   }
   // load only snippets with that tag
   else if (e.target.className === "tag") {
     let tag = e.target.innerText.slice(1); //get tag clicked
     query(tag);
-  }
-  else if (e.target.classList.contains("fa-ellipsis-v")) {
+  } else if (e.target.classList.contains("fa-ellipsis-v")) {
     console.log(e.target.nextElementSibling);
-    e.target.parentElement.classList.toggle("container__slider--show");//expand slider
-    e.target.classList.toggle("containerSlider__dots--move");// move slider dots to up corner
-    e.target.nextElementSibling.classList.toggle("containerSlider__menu--show")// show slider menu
-  }
-  else if (e.target.textContent === "Edit") { //edit the snippet
+    e.target.parentElement.classList.toggle("container__slider--show"); //expand slider
+    e.target.classList.toggle("containerSlider__dots--move"); // move slider dots to up corner
+    e.target.nextElementSibling.classList.toggle("containerSlider__menu--show"); // show slider menu
+  } else if (e.target.textContent === "Edit") {
+    //edit the snippet
     // const code = e.target.parentElement.parentElement.parentElement.children[0].firstElementChild.firstElementChild.textContent;// get the snippet text after click on slider menu Edit
-    const id = e.target.parentElement.parentElement.parentElement.dataset.id; // get the snippet text after click on 
+    const id = e.target.parentElement.parentElement.parentElement.dataset.id; // get the snippet text after click on
     console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
     // add__form.classList.toggle("add__form--show");
     // input__form.snippet__input.textContent = code;
-    console.log(getDataToEdit(id))
-
+    getDataToEdit(id);
   }
 });
