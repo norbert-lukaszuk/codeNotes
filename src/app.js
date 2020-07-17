@@ -18,7 +18,10 @@ const user__button = document.querySelector("#user__button");
 const status = document.querySelector("#status");
 const status__wraper = document.querySelector("#status__wraper");
 const count = document.querySelector("#count");
+const category = document.getElementsByName("category");
+
 let Actual = "JavaScript";
+let EditId = ""; // id of edited container in firestore
 class Snippet {
   constructor(lang, code, tags, color, time) {
     this.lang = lang;
@@ -51,15 +54,23 @@ const showStatus = (massage, time) => {
 };
 // get data from firestore to edit
 const getDataToEdit = (id) => {
-  let data = 1;
+  // fetch data from firestore async
   db.collection(`data/codeNotes/${Actual}`)
     .doc(id)
     .get()
     .then((resp) => {
       input__form.snippet__input.textContent = resp.data().code;
+      // put hastags in form
       resp
         .data()
         .tags.forEach((e) => (input__form.tags__input.value += " #" + e));
+      // check the languge in radio input in form
+      category.forEach((e) => {
+        e.dataset.prism === resp.data().prism
+          ? e.setAttribute("checked", true)
+          : false;
+      });
+      // show the add form with data injected
       add__form.classList.toggle("add__form--show");
     });
 };
@@ -271,7 +282,6 @@ input__form.addEventListener("submit", (e) => {
   // set time stamp on snippet (??db.Timestamp dosn't work)
   newSnippet.time = firebase.firestore.Timestamp.fromDate(new Date());
   // get info from radio button
-  const category = document.getElementsByName("category");
   category.forEach((e) => {
     if (e.checked) {
       newSnippet.color = e.dataset.color;
@@ -293,6 +303,7 @@ input__form.addEventListener("submit", (e) => {
     .catch((err) => console.error(err));
   // close add__form after sending data to firestore
   add__form.classList.remove("add__form--show");
+  input__form.reset();
 });
 // cancel button to cancel adding snippet
 cancel__button.addEventListener("click", (e) => {
@@ -323,10 +334,10 @@ output.addEventListener("click", (e) => {
   } else if (e.target.textContent === "Edit") {
     //edit the snippet
     // const code = e.target.parentElement.parentElement.parentElement.children[0].firstElementChild.firstElementChild.textContent;// get the snippet text after click on slider menu Edit
-    const id = e.target.parentElement.parentElement.parentElement.dataset.id; // get the snippet text after click on
+    EditId = e.target.parentElement.parentElement.parentElement.dataset.id; // get the snippet text after click on
     console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
     // add__form.classList.toggle("add__form--show");
     // input__form.snippet__input.textContent = code;
-    getDataToEdit(id);
+    getDataToEdit(EditId);
   }
 });
