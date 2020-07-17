@@ -46,6 +46,11 @@ const showStatus = (massage, time) => {
   status__wraper.firstElementChild.textContent = massage;
   setTimeout(() => { status__wraper.classList.remove("status__wraper--show") }, time)
 }
+// get data from firestore to edit
+const getDataToEdit = (id) => {
+  db.collection(`data/codeNotes/${Actual}`).doc(id).get()
+    .then(resp => console.log(resp.data().code))
+}
 // load the the one container in output
 const loadContent = (data, id) => {
   const container = document.createElement("div");
@@ -295,7 +300,7 @@ output.addEventListener("click", (e) => {
   }
   // load only snippets with that tag
   else if (e.target.className === "tag") {
-    let tag = e.target.innerText.slice(1)
+    let tag = e.target.innerText.slice(1); //get tag clicked
     query(tag);
   }
   else if (e.target.classList.contains("fa-ellipsis-v")) {
@@ -303,5 +308,12 @@ output.addEventListener("click", (e) => {
     e.target.parentElement.classList.toggle("container__slider--show");//expand slider
     e.target.classList.toggle("containerSlider__dots--move");// move slider dots to up corner
     e.target.nextElementSibling.classList.toggle("containerSlider__menu--show")// show slider menu
+  }
+  else if (e.target.textContent === "Edit") { //edit the snippet
+    const code = e.target.parentElement.parentElement.parentElement.children[0].firstElementChild.firstElementChild.textContent;// get the snippet text after click on slider menu Edit
+    const id = e.target.parentElement.parentElement.parentElement.dataset.id; // get the snippet text after click on 
+    console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
+    getDataToEdit(id);
+    // input__form.snippet__input.textContent = code;
   }
 });
