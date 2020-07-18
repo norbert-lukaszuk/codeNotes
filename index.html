@@ -66,7 +66,38 @@
       </div>
     </form>
   </div>
+  <!-- add form -->
   <div class="add__form" id="add__form">
+    <div class="form__wraper" id="form__wraper">
+      <form id="input__form">
+        <div class="radio__wraper" id="radio__wraper">
+          <input type="radio" name="category" id="css" value="CSS" data-color="var(--cssColor)"
+            data-prism="language-css" />
+          <label for="css">CSS</label>
+          <input type="radio" name="category" id="javaScript" value="JavaScript" data-color="var(--jsColor)"
+            data-prism="language-js" />
+          <label for="javaScript">JS</label>
+          <input type="radio" name="category" id="html" value="HTML" data-color="var(--htmlColor)"
+            data-prism="language-html" />
+          <label for="html">HTML</label>
+        </div>
+        <div class="textarea__wraper" id="textarea__wraper">
+          <i class="fas fa-code"></i>
+          <textarea id="snippet__input" cols="44" rows="8" data-color="var(--cssColor)"></textarea>
+        </div>
+        <div class="tags__wraper" id="tags__wraper">
+          <i class="fas fa-hashtag"></i>
+          <input type="text" id="tags__input" placeholder="#hashtags" />
+        </div>
+        <div class="buttons__wraper" id="buttons__wraper">
+          <button type="submit" id="submit__button">Add</button>
+          <button id="cancel__button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- edit form -->
+  <div class="add__form" id="edit__form">
     <div class="form__wraper" id="form__wraper">
       <form id="input__form">
         <div class="radio__wraper" id="radio__wraper">

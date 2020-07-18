@@ -1,7 +1,7 @@
 const hamburger = document.querySelector("#hamburger");
 const header__wraper = document.querySelector("#header__wraper");
 const selected = document.querySelector("#selected");
-const input__form = document.querySelector("#input__form");
+const input__form = document.querySelectorAll("#input__form");
 const language__list = document.querySelector("#language__list");
 const login__form = document.querySelector("#login__form");
 const login__wraper = document.querySelector("#login__wraper");
@@ -12,6 +12,7 @@ const backarrow = document.querySelector("#backarrow");
 const Body = document.querySelector("body");
 const output = document.querySelector("#output");
 const add__form = document.querySelector("#add__form");
+const edit__form = document.querySelector("#edit__form");
 const cancel__button = document.querySelector("#cancel__button");
 const login__cancel = document.querySelector("#login__cancel");
 const user__button = document.querySelector("#user__button");
@@ -52,6 +53,7 @@ const showStatus = (massage, time) => {
     status__wraper.classList.remove("status__wraper--show");
   }, time);
 };
+/* EDIT SNIPPET */
 // get data from firestore to edit
 const getDataToEdit = (id) => {
   // fetch data from firestore async
@@ -59,11 +61,11 @@ const getDataToEdit = (id) => {
     .doc(id)
     .get()
     .then((resp) => {
-      input__form.snippet__input.textContent = resp.data().code;
+      input__form[1].snippet__input.textContent = resp.data().code;
       // put hastags in form
       resp
         .data()
-        .tags.forEach((e) => (input__form.tags__input.value += " #" + e));
+        .tags.forEach((e) => (input__form[1].tags__input.value += " #" + e));
       // check the languge in radio input in form
       category.forEach((e) => {
         e.dataset.prism === resp.data().prism
@@ -71,9 +73,12 @@ const getDataToEdit = (id) => {
           : false;
       });
       // show the add form with data injected
-      add__form.classList.toggle("add__form--show");
+      edit__form.classList.toggle("add__form--show");
     });
 };
+// save edited snippet in firestore
+
+
 // load the the one container in output
 const loadContent = (data, id) => {
   const container = document.createElement("div");
@@ -82,8 +87,8 @@ const loadContent = (data, id) => {
   container.setAttribute("data-id", id);
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
-        data.code
-      )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
+      data.code
+    )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
     : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
@@ -270,7 +275,7 @@ nav__list.addEventListener("click", (e) => {
 });
 // add snippet
 // submit form to add the snippet
-input__form.addEventListener("submit", (e) => {
+input__form[0].addEventListener("submit", (e) => {
   e.preventDefault();
   // sending data to firestore
   let newSnippet = new Snippet();
