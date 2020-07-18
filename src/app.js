@@ -77,7 +77,18 @@ const getDataToEdit = (id) => {
     });
 };
 // save edited snippet in firestore
-
+input__form[1].addEventListener("submit", e => {
+  e.preventDefault();
+  let arr = input__form[1].tags__input.value.split(" ");
+  let tagged = [];
+  tagged = arr.map((e) => e);
+  console.log(tagged);
+  db.collection(`data/codeNotes/${Actual}`).doc(EditId).update({
+    code: input__form[1].snippet__input.value,
+  })
+  edit__form.classList.remove("add__form--show");
+  edit__form.reset();
+})
 
 // load the the one container in output
 const loadContent = (data, id) => {
