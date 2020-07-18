@@ -260,10 +260,6 @@ body {
   left: 10px;
   transition: all .2s ease-in-out;
 }
-.language__tag i:hover{
-  transform: scale(1.15);
-  color: crimson;
-}
 .login__wraper {
   display: none;
   justify-content: center;
@@ -300,6 +296,7 @@ body {
   transform: translateX(-210px);
   transition: all 0.5s ease-out;
   z-index: 1;
+  backdrop-filter: blur(5px);
 }
 .nav__wraper--show {
   transform: translateX(0);
@@ -489,5 +486,11 @@ body {
 }
 .snippet__container{
   width: 550px;
+}
+.language__tag::-webkit-scrollbar{
+  display: none;
+}
+.language__tag{
+  scrollbar-width: none;
 }
 }
