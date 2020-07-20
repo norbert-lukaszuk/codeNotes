@@ -113,6 +113,9 @@ const setOnSnapshot = () => {
   db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
     let changes = snapshot.docChanges();
     changes.forEach((change) => {
+      if (change.type === "modified") {
+        console.log("snippet modified")
+      }
       const data = change.doc.data();
       const id = change.doc.id;
       loadContent(data, id);
