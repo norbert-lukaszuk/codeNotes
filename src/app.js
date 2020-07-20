@@ -77,18 +77,19 @@ const getDataToEdit = (id) => {
     });
 };
 // save edited snippet in firestore
-input__form[1].addEventListener("submit", e => {
+input__form[1].addEventListener("submit", (e) => {
   e.preventDefault();
   let arr = input__form[1].tags__input.value.split(" ");
   let tagged = [];
-  tagged = arr.map((e) => e);
+  tagged = arr.map((e) => e.slice(1));
   console.log(tagged);
   db.collection(`data/codeNotes/${Actual}`).doc(EditId).update({
     code: input__form[1].snippet__input.value,
-  })
+    tags: tagged,
+  });
   edit__form.classList.remove("add__form--show");
-  edit__form.reset();
-})
+  input__form[1].reset();
+});
 
 // load the the one container in output
 const loadContent = (data, id) => {
@@ -98,8 +99,8 @@ const loadContent = (data, id) => {
   container.setAttribute("data-id", id);
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
-      data.code
-    )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
+        data.code
+      )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
     : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
@@ -113,9 +114,23 @@ const setOnSnapshot = () => {
   db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
     let changes = snapshot.docChanges();
     changes.forEach((change) => {
+      // put the edited values in selected container
       if (change.type === "modified") {
-        console.log("snippet modified")
+        // select edited container by its id
+        const edited = document.querySelector(`[data-id='${change.doc.id}']`);
+        // select the element with code inside
+        const editedCode = edited.firstElementChild.children[0].children[0];
+        editedCode.textContent = change.doc.data().code;
+        // select the hashtag section of the container
+        const editedHash = edited.children[2];
+        editedHash.innerHTML = ""; // make space for edited hastags
+        change.doc.data().tags.forEach((e) => {
+          //put hastags in the elemenet
+          editedHash.innerHTML += `<span class="tag">#${e}</span>`;
+        });
+        // edited.children[1].classList.remove("container__slider--show");
       }
+      // add new container or load after refresh
       const data = change.doc.data();
       const id = change.doc.id;
       loadContent(data, id);
@@ -293,11 +308,11 @@ input__form[0].addEventListener("submit", (e) => {
   e.preventDefault();
   // sending data to firestore
   let newSnippet = new Snippet();
-  let arr = input__form.tags__input.value.split(" ");
+  let arr = input__form[0].tags__input.value.split(" ");
   let tagged = [];
   tagged = arr.map((e) => e);
   newSnippet.tags = tagged;
-  newSnippet.code = input__form.snippet__input.value;
+  newSnippet.code = input__form[0].snippet__input.value;
   // set time stamp on snippet (??db.Timestamp dosn't work)
   newSnippet.time = firebase.firestore.Timestamp.fromDate(new Date());
   // get info from radio button
@@ -322,13 +337,13 @@ input__form[0].addEventListener("submit", (e) => {
     .catch((err) => console.error(err));
   // close add__form after sending data to firestore
   add__form.classList.remove("add__form--show");
-  input__form.reset();
+  input__form[0].reset();
 });
 // cancel button to cancel adding snippet
 cancel__button.addEventListener("click", (e) => {
   add__form.classList.remove("add__form--show");
   e.preventDefault(); //because cancel__button is inside form & that causes page refresh
-  input__form.reset();
+  input__form[0].reset();
 });
 
 // click on container to expand container for all snippet text
