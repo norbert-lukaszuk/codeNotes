@@ -126,6 +126,10 @@ const setOnSnapshot = () => {
           //put hastags in the elemenet
           editedHash.innerHTML += `<span class="tag">#${e}</span>`;
         });
+        // close container slide menu after edit 
+        edited.children[1].classList.remove("container__slider--show");
+        edited.children[1].children[0].classList.remove("containerSlider__dots--move");
+        edited.children[1].children[1].classList.remove("containerSlider__menu--show");
       }
       // add new container or load after refresh
       const data = change.doc.data();
@@ -269,18 +273,8 @@ nav__list.addEventListener("click", (e) => {
     Actual = e.target.textContent;
     output.innerHTML = ""; // reset the output
     unsubscribe();
-    db.collection(`data/codeNotes/${Actual}`).onSnapshot((snapshot) => {
-      let changes = snapshot.docChanges();
-      console.log(changes);
-      changes.forEach((change) => {
-        const data = change.doc.data();
-        const id = change.doc.id;
-        loadContent(data, id);
-        changeHeader(data);
-        hideAll();
-      });
-    });
-  } //get style of clicked element and change heder text & color
+    setOnSnapshot();
+  }
 
   // add button click
   if (e.target.id === "add__button") {
@@ -358,10 +352,11 @@ output.addEventListener("click", (e) => {
     let tag = e.target.innerText.slice(1); //get tag clicked
     query(tag);
   } else if (e.target.classList.contains("fa-ellipsis-v")) {
-    console.log(e.target.nextElementSibling);
+    // show/hide container menu
     e.target.parentElement.classList.toggle("container__slider--show"); //expand slider
     e.target.classList.toggle("containerSlider__dots--move"); // move slider dots to up corner
     e.target.nextElementSibling.classList.toggle("containerSlider__menu--show"); // show slider menu
+
   } else if (e.target.textContent === "Edit") {
     //edit the snippet
     // const code = e.target.parentElement.parentElement.parentElement.children[0].firstElementChild.firstElementChild.textContent;// get the snippet text after click on slider menu Edit

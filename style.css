@@ -114,6 +114,7 @@ body {
 }
 .containerSlider__menu p{
   padding: 5px 20px;
+  cursor: pointer;
 }
 .count{
   position: absolute;
