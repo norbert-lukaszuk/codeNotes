@@ -65,7 +65,7 @@ const getDataToEdit = (id) => {
       // put hastags in form
       resp
         .data()
-        .tags.forEach((e) => (input__form[1].tags__input.value += " #" + e));
+        .tags.forEach((e) => (input__form[1].tags__input.value += " " + e));
       // check the languge in radio input in form
       category.forEach((e) => {
         e.dataset.prism === resp.data().prism
@@ -79,13 +79,11 @@ const getDataToEdit = (id) => {
 // save edited snippet in firestore
 input__form[1].addEventListener("submit", (e) => {
   e.preventDefault();
-  let arr = input__form[1].tags__input.value.split(" ");
-  let tagged = [];
-  tagged = arr.map((e) => e.slice(1));
-  console.log(tagged);
+  const inputTrim = input__form[1].tags__input.value.trim();//remove whitespaces
+  let tags = inputTrim.split(" "); // convert to array
   db.collection(`data/codeNotes/${Actual}`).doc(EditId).update({
     code: input__form[1].snippet__input.value,
-    tags: tagged,
+    tags: tags,
   });
   edit__form.classList.remove("add__form--show");
   input__form[1].reset();
@@ -99,8 +97,8 @@ const loadContent = (data, id) => {
   container.setAttribute("data-id", id);
   data.lang === "HTML"
     ? (container.innerHTML = `<pre class="code__block"><code class="language-html">${htmlConversion(
-        data.code
-      )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
+      data.code
+    )}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`)
     : (container.innerHTML = `<pre class="code__block"><code class="${data.prism}">${data.code}</code></pre><div class="container__slider"><i class="fas fa-ellipsis-v"></i><div class="containerSlider__menu"><p>Edit</p><p>Delete</p><p>Copy</p></div></div><p class="language__tag"></p>`);
   data.tags.forEach((e) => {
     container.children[2].innerHTML += `<span class="tag">#${e}</span>`;
@@ -128,7 +126,6 @@ const setOnSnapshot = () => {
           //put hastags in the elemenet
           editedHash.innerHTML += `<span class="tag">#${e}</span>`;
         });
-        // edited.children[1].classList.remove("container__slider--show");
       }
       // add new container or load after refresh
       const data = change.doc.data();
